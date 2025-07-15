@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Safai | Pure Products. Powerful Clean.</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
+
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-color: #ffffff;
       color: #000000;
     }
@@ -45,7 +47,10 @@
       margin: auto;
     }
     section h2 {
+      font-family: 'Playfair Display', serif;
       color: #D4AF37;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
     ul {
       padding-left: 1.2rem;
@@ -63,14 +68,26 @@
       margin-bottom: 1rem;
       font-style: italic;
     }
+    .animated-img {
+      display: block;
+      margin: 2rem auto;
+      width: 80%;
+      max-width: 400px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="A_logo_design_for_the_company_\"SAFAI\"_is_displayed.png" alt="Safai Logo">
+    <img src="logo.png" alt="Safai Logo">
     <p>Pure Products. Powerful Clean.</p>
   </header>
-  
+
   <nav>
     <a href="#about">About</a>
     <a href="#booking">Book</a>
@@ -81,6 +98,7 @@
 
   <section id="about">
     <h2>Our Mission</h2>
+    <img class="animated-img" src="https://cdn.pixabay.com/photo/2020/03/30/15/26/spray-4984619_960_720.png" alt="Natural Cleaning">
     <p>
       At Safai, our mission is to provide exceptional home cleaning services using
       only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
@@ -89,6 +107,7 @@
 
   <section id="booking">
     <h2>Book a Cleaning</h2>
+    <img class="animated-img" src="https://cdn.pixabay.com/photo/2014/04/03/00/36/cleaning-309216_960_720.png" alt="Booking">
     <p>To book an appointment, please use our real-time calendar coming soon or contact us directly.</p>
   </section>
 
