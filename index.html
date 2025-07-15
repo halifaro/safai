@@ -10,11 +10,12 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #ffffff, #f5f5f5);
+      background: url('https://cdn.pixabay.com/photo/2017/06/07/11/15/cleaning-2386680_1280.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #000000;
     }
     header {
-      background-color: #000000;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
       text-align: center;
     }
@@ -45,12 +46,21 @@
       padding: 2rem;
       max-width: 800px;
       margin: auto;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 8px;
+      margin-top: 2rem;
     }
     section h2 {
       font-family: 'Playfair Display', serif;
       color: #D4AF37;
       font-size: 2rem;
       margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    section h2 img {
+      width: 30px;
+      margin-right: 10px;
     }
     ul {
       padding-left: 1.2rem;
@@ -58,27 +68,16 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #000000;
+      background-color: rgba(0, 0, 0, 0.8);
       color: #ffffff;
       font-size: 0.9rem;
+      margin-top: 2rem;
     }
     .testimonial {
       border-left: 4px solid #D4AF37;
       padding-left: 1rem;
       margin-bottom: 1rem;
       font-style: italic;
-    }
-    .animated-img {
-      display: block;
-      margin: 2rem auto;
-      width: 80%;
-      max-width: 400px;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
     }
     .calendly-inline-widget {
       min-width: 320px;
@@ -102,8 +101,7 @@
   </nav>
 
   <section id="about">
-    <h2>Our Mission</h2>
-    <img class="animated-img" src="https://cdn-icons-png.flaticon.com/512/809/809957.png" alt="Natural Cleaning">
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="icon">Our Mission</h2>
     <p>
       At Safai, our mission is to provide exceptional home cleaning services using
       only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
@@ -111,13 +109,12 @@
   </section>
 
   <section id="booking">
-    <h2>Book a Cleaning</h2>
-    <img class="animated-img" src="https://cdn-icons-png.flaticon.com/512/6197/6197630.png" alt="Booking">
-    <div class="calendly-inline-widget" data-url="https://calendly.com/your-calendly-username/cleaning-appointment"></div>
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="icon">Book a Cleaning</h2>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/halimafarooq786"></div>
   </section>
 
   <section id="pricing">
-    <h2>Our Pricing</h2>
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="icon">Our Pricing</h2>
     <ul>
       <li>Standard Clean: $80</li>
       <li>Deep Clean: $150</li>
@@ -126,7 +123,7 @@
   </section>
 
   <section id="testimonials">
-    <h2>What Our Clients Say</h2>
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/846/846449.png" alt="icon">What Our Clients Say</h2>
     <div class="testimonial">
       "Safai made my home feel brand new — and I love knowing everything is chemical-free!" – Ayesha K.
     </div>
@@ -139,7 +136,7 @@
   </section>
 
   <section id="contact">
-    <h2>Contact Us</h2>
+    <h2><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="icon">Contact Us</h2>
     <p>Email: hello@safai.com<br />Phone: (123) 456-7890</p>
   </section>
 
