@@ -146,13 +146,29 @@
       100% { transform: scale(1); }
     }
   </style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async>// Scroll-triggered fade-in for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('section').forEach(section => {
+  section.style.animationPlayState = 'paused';
+  observer.observe(section);
+});
+</script>
 </head>
 <body>
-  <header style="background-color: #000000; padding: 3rem 1rem 2rem; text-align: center;">
+  <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
   <div style="display: inline-block; line-height: 1.2;">
-    <h1 class="fade-in bigger-logo">SAFAI</h1>
-    <p style="font-size: 1.4rem; margin-top: 0.3rem; color: #d4af37; font-weight: 600;">Pure Products. Powerful Clean.</p>
+    <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none;">SAFAI</h1>
+    <div style="font-size: 1.1rem; margin-top: 0.5rem; color: #1f1f1f; font-weight: 600; letter-spacing: 1px;">PURE PRODUCTS.<br>POWERFUL CLEAN.</div>
   </div>
 </header>
 
