@@ -103,13 +103,55 @@
         opacity: 1;
       }
     }
+      .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    .bigger-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: #7f5f3c;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: sectionFade 1.2s ease-out forwards;
+    }
+
+    @keyframes sectionFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    a[href="#booking"] {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
   </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
   <header style="background-color: #000000; padding: 3rem 1rem 2rem; text-align: center;">
   <div style="display: inline-block; line-height: 1.2;">
-    <h1 class="fade-in">SAFAI</h1>
+    <h1 class="fade-in bigger-logo">SAFAI</h1>
     <p style="font-size: 1.4rem; margin-top: 0.3rem; color: #d4af37; font-weight: 600;">Pure Products. Powerful Clean.</p>
   </div>
 </header>
