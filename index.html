@@ -224,14 +224,8 @@ function initAutocomplete() {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 }
-<script>
-function switchLanguage() {
-  const lang = document.getElementById('languageSwitcher').value;
-  alert('Language switching coming soon: ' + lang);
-  // You can integrate i18n here or switch content dynamically.
-}
 </script>
-$1
+</head>
 <body>
   <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
   <div style="display: inline-block; line-height: 1.2;">
@@ -241,15 +235,8 @@ $1
   </div>
 </header>
 
-  <div style="position: absolute; top: 10px; right: 20px;">
-  <select id="languageSwitcher" onchange="switchLanguage()" style="padding: 6px 10px; border-radius: 6px; border: none; background: #7f5f3c; color: #fff9f3; font-weight: bold; font-family: 'Roboto', sans-serif;">
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="ur">اردو</option>
-  </select>
-</div>
-
-$1<a href="#about" onclick="showSection('about')">About</a>
+  <nav>
+  <a href="#about" onclick="showSection('about')">About</a>
   <a href="#booking" onclick="showSection('booking')">Book</a>
   <a href="#pricing" onclick="showSection('pricing')">Pricing</a>
   <a href="#testimonials" onclick="showSection('testimonials')">Testimonials</a>
