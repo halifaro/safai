@@ -162,42 +162,35 @@
   100% {background-position: 0% 50%;}
 }
 </style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async>// Scroll-triggered fade-in for sections
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = 'running';
-      observer.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.1
-});
-
-document.querySelectorAll('section').forEach(section => {
-  section.style.animationPlayState = 'paused';
-  observer.observe(section);
-});
-// Disable non-Friday/Saturday in date picker
-const dateInput = document.getElementById('datePicker');
-dateInput.addEventListener('input', function() {
-  const date = new Date(this.value);
-  const day = date.getUTCDay();
-  if (day !== 5 && day !== 6) {
-    alert('Please select a Friday or Saturday.');
-    this.value = '';
-  }
-});
-  // Google Places Autocomplete for address
-  function initAutocomplete() {
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
+<script>
+function initAutocomplete() {
   const input = document.getElementById('autocomplete');
   if (!input) return;
-  const autocomplete = new google.maps.places.Autocomplete(input, { types: ['geocode'] });
+
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['geocode'],
+    componentRestrictions: { country: 'us' }
+  });
+
+  const dallasBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(32.6, -97.0),
+    new google.maps.LatLng(33.1, -96.5)
+  );
+  autocomplete.setBounds(dallasBounds);
+
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('.pac-container').forEach(container => {
+      container.style.fontFamily = 'Roboto, sans-serif';
+      container.style.borderRadius = '6px';
+      container.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+      container.style.zIndex = '9999';
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
-    );
-  }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
   <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
