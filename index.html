@@ -12,7 +12,7 @@
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 15s ease infinite, animateBackground 20s linear infinite;
   color: #000000;
 }
     header {
@@ -161,6 +161,11 @@
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
+  @keyframes animateBackground {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
 </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
