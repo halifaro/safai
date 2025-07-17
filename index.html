@@ -190,9 +190,10 @@ dateInput.addEventListener('input', function() {
 });
   // Google Places Autocomplete for address
   function initAutocomplete() {
-    const autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'),
-      { types: ['geocode'] }
+  const input = document.getElementById('autocomplete');
+  if (!input) return;
+  const autocomplete = new google.maps.places.Autocomplete(input, { types: ['geocode'] });
+}
     );
   }
 </script>
