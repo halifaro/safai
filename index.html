@@ -169,13 +169,13 @@
 .bubble {
   position: absolute;
   bottom: -100px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0));
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
   border-radius: 50%;
   animation: rise 20s infinite ease-in;
   pointer-events: none;
   box-shadow: 0 0 12px rgba(255,255,255,0.2);
   backdrop-filter: blur(2px);
-  opacity: 0.4;
+  opacity: 0.8;
 }
 @keyframes rise {
   0% {
@@ -246,11 +246,11 @@ function initAutocomplete() {
     </p>
     <h3 style="margin-top: 2rem; color: #7f5f3c;">Our Services</h3>
     <ul>
-      <li><strong>Under 3 Bedrooms ($150):</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
-      <li><strong>4+ Bedrooms ($300):</strong> Thorough top-to-bottom clean for larger homes with more living space and bathrooms.</li>
-      <li><strong>Deep Cleaning 1-Story ($300):</strong> In-depth cleaning of all surfaces, including baseboards, appliances, and inside cabinets for single-level homes.</li>
-      <li><strong>Deep Cleaning 2-Story ($500):</strong> Full-detail cleaning for multi-story houses. Includes staircases, high-touch areas, and detailed scrubbing.</li>
-      <li><strong>Move In/Move Out ($250):</strong> Deep clean for homes that are being vacated or prepared for new residents. Includes interior cabinets, appliances, and walls.</li>
+      <li><strong>Under 3 Bedrooms :</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
+      <li><strong>4+ Bedrooms :</strong> Thorough top-to-bottom clean for larger homes with more living space and bathrooms.</li>
+      <li><strong>Deep Cleaning 1-Story :</strong> In-depth cleaning of all surfaces, including baseboards, appliances, and inside cabinets for single-level homes.</li>
+      <li><strong>Deep Cleaning 2-Story :</strong> Full-detail cleaning for multi-story houses. Includes staircases, high-touch areas, and detailed scrubbing.</li>
+      <li><strong>Move In/Move Out :</strong> Deep clean for homes that are being vacated or prepared for new residents. Includes interior cabinets, appliances, and walls.</li>
       <li><strong>Commercial Cleaning:</strong> Customized cleaning for office spaces and small businesses. Please contact us for a quote.</li>
       <li><strong>Recurring Services:</strong> Weekly, bi-weekly, and monthly services at special rates. Contact us to schedule a plan that works for you.</li>
     </ul>
@@ -349,7 +349,7 @@ form.addEventListener('submit', function(e) {
   </footer>
 <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
 <script>
-for (let i = 0; i < 45; i++) {
+for (let i = 0; i < 25; i++) {
   const bubble = document.createElement('div');
   const baseSizes = [10, 20, 35];
   const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
