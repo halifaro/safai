@@ -221,7 +221,7 @@ function initAutocomplete() {
   <h2><span style="font-size:1.5rem; margin-right:10px;">🧼</span>Book a Cleaning</h2>
   <form id="bookingForm" style="display: flex; flex-direction: column; gap: 1rem; background-color: #ffffff; padding: 2rem; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); font-family: 'Roboto', sans-serif;">
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Full Name:<input type="text" name="name" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"> </label>
-    <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Phone Number:<input type="tel" name="phone" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
+    <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Phone Number:<input type="tel" name="phone" required placeholder="(123) 456-7890" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Email Address:<input type="email" name="email" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Home Address:<input type="text" name="address" id="autocomplete" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Select Service:<select id="serviceSelect" name="service" onchange="updatePrice()" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
@@ -239,7 +239,7 @@ function initAutocomplete() {
       </select>
     </label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Additional Notes:<textarea name="notes" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></textarea></label>
-    <label style="font-weight: 600; color: #7f5f3c;"><input type="checkbox" name="reminders" style="margin-right: 6px;"> Text me reminders</label>
+    <label style="font-weight: 600; color: #7f5f3c;"><input type="checkbox" name="reminders" required style="margin-right: 6px;"> Text me reminders</label>
     <p><strong>Total: $<span id="totalPrice">80</span></strong></p>
     <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
   </form>
@@ -286,7 +286,7 @@ form.addEventListener('submit', function(e) {
 
   <section id="contact">
     <h2><span style="font-size:1.5rem; margin-right:10px;">📞</span>Contact Us</h2>
-    <p>Email: hello@safai.com<br />Phone: (123) 456-7890</p>
+    <p>Email: bookwithsafai@gmail.com<br />Phone: (469) 665-9991</p>
   </section>
 
   <footer>
