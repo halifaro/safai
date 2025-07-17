@@ -113,37 +113,93 @@
   </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-    document.querySelectorAll('section').forEach(section => {
-      section.style.animationPlayState = 'paused';
-      observer.observe(section);
-    });
-    const dateInput = document.getElementById('datePicker');
-    dateInput.addEventListener('input', function() {
-      const date = new Date(this.value);
-      const day = date.getUTCDay();
-      if (day !== 5 && day !== 6) {
-        alert('Please select a Friday or Saturday.');
-        this.value = '';
-      }
-    });
     function initAutocomplete() {
       const autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete'),
         { types: ['geocode'] }
       );
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      document.querySelectorAll('section').forEach(section => {
+        section.style.animationPlayState = 'paused';
+        observer.observe(section);
+      });
+
+      const dateInput = document.getElementById('datePicker');
+      if (dateInput) {
+        dateInput.addEventListener('input', function() {
+          const date = new Date(this.value);
+          const day = date.getUTCDay();
+          if (day !== 5 && day !== 6) {
+            alert('Please select a Friday or Saturday.');
+            this.value = '';
+          }
+        });
+      }
+    });
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
-<!-- Rest of your body remains the same -->
+  <header>
+    <h1 class="fade-in">SAFAI</h1>
+    <p style="font-size: 1.3rem; margin-top: 0.5rem; font-weight: 500;">Pure Products. Powerful Clean.</p>
+    <p style="font-size: 1.1rem; color: #555">✨ Natural. Chemical-Free. Toxin-Free.<br />Safe for babies, pets, and your health.</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#booking">Book Now</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="booking">
+    <h2>🧼 Book a Cleaning</h2>
+    <form>
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="phone">Phone:</label><br />
+      <input type="tel" id="phone" name="phone" required /><br /><br />
+
+      <label for="autocomplete">Address:</label><br />
+      <input id="autocomplete" name="address" placeholder="Enter your address" required /><br /><br />
+
+      <label for="datePicker">Preferred Date:</label><br />
+      <input type="date" id="datePicker" name="date" required /><br /><br />
+
+      <label for="time">Preferred Time:</label><br />
+      <select id="time" name="time" required>
+        <option value="">Select a time</option>
+        <option value="9am">9:00 AM</option>
+        <option value="11am">11:00 AM</option>
+        <option value="1pm">1:00 PM</option>
+        <option value="3pm">3:00 PM</option>
+        <option value="5pm">5:00 PM</option>
+      </select><br /><br />
+
+      <label for="notes">Special Notes:</label><br />
+      <textarea id="notes" name="notes" rows="3"></textarea><br /><br />
+
+      <label><input type="checkbox" name="reminders" /> Send me text reminders</label><br /><br />
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Safai. All rights reserved.
+  </footer>
+</body>
+</html>
