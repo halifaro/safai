@@ -251,9 +251,13 @@ function initAutocomplete() {
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Email Address:<input type="email" name="email" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Home Address:<input type="text" name="address" id="autocomplete" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Select Service:<select id="serviceSelect" name="service" onchange="updatePrice()" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
-        <option value="standard">Standard Clean - $80</option>
-        <option value="deep">Deep Clean - $150</option>
-        <option value="move">Move-in/Out Clean - $200</option>
+        <option value="under3">Under 3 bedrooms - $150</option>
+        <option value="4plus">4+ bedrooms - $300</option>
+        <option value="deep1">Deep cleaning 1 story house - $300</option>
+        <option value="deep2">Deep cleaning 2 story house - $500</option>
+        <option value="move">Move in/move out clean - $250</option>
+        <option value="commercial">Commercial cleaning - please contact</option>
+        <option value="recurring">Weekly, bi-weekly, monthly - special rates, please contact</option>
       </select>
     </label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Preferred Date:<input type="date" name="date" id="datePicker" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></label>
@@ -274,8 +278,16 @@ function initAutocomplete() {
 <script>
 function updatePrice() {
   const service = document.getElementById('serviceSelect').value;
-  const priceMap = { standard: 80, deep: 150, move: 200 };
-  document.getElementById('totalPrice').innerText = priceMap[service];
+  const priceMap = {
+  under3: 150,
+  "4plus": 300,
+  deep1: 300,
+  deep2: 500,
+  move: 250,
+  commercial: '—',
+  recurring: '—'
+};
+  document.getElementById('totalPrice').innerText = priceMap[service] !== '—' ? priceMap[service] : 'Please contact';
 }
 
 const form = document.getElementById('bookingForm');
@@ -291,9 +303,13 @@ form.addEventListener('submit', function(e) {
   <section id="pricing">
     <h2><span style="font-size:1.5rem; margin-right:10px;">🧽</span>Our Pricing</h2>
     <ul>
-      <li>Standard Clean: $80</li>
-      <li>Deep Clean: $150</li>
-      <li>Move-in/Move-out Clean: $200</li>
+      <li>Under 3 bedrooms: $150</li>
+      <li>4+ bedrooms: $300</li>
+      <li>Deep cleaning 1 story house: $300</li>
+      <li>Deep cleaning 2 story house: $500</li>
+      <li>Move in/move out clean: $250</li>
+      <li>Commercial cleaning – please contact</li>
+      <li>Weekly, bi-weekly, monthly special rates – please contact</li>
     </ul>
   </section>
 
