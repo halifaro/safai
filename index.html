@@ -190,6 +190,23 @@
     opacity: 0;
   }
 }
+.flood-bubbles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0));
+  animation: bubbleFlood 1s ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes bubbleFlood {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.4); }
+}
 </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
@@ -246,11 +263,11 @@ function initAutocomplete() {
     </p>
     <h3 style="margin-top: 2rem; color: #7f5f3c;">Our Services</h3>
     <ul>
-      <li><strong>Under 3 Bedrooms :</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
-      <li><strong>4+ Bedrooms :</strong> Thorough top-to-bottom clean for larger homes with more living space and bathrooms.</li>
-      <li><strong>Deep Cleaning 1-Story :</strong> In-depth cleaning of all surfaces, including baseboards, appliances, and inside cabinets for single-level homes.</li>
-      <li><strong>Deep Cleaning 2-Story :</strong> Full-detail cleaning for multi-story houses. Includes staircases, high-touch areas, and detailed scrubbing.</li>
-      <li><strong>Move In/Move Out :</strong> Deep clean for homes that are being vacated or prepared for new residents. Includes interior cabinets, appliances, and walls.</li>
+      <li><strong>Under 3 Bedrooms ($150):</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
+      <li><strong>4+ Bedrooms ($300):</strong> Thorough top-to-bottom clean for larger homes with more living space and bathrooms.</li>
+      <li><strong>Deep Cleaning 1-Story ($300):</strong> In-depth cleaning of all surfaces, including baseboards, appliances, and inside cabinets for single-level homes.</li>
+      <li><strong>Deep Cleaning 2-Story ($500):</strong> Full-detail cleaning for multi-story houses. Includes staircases, high-touch areas, and detailed scrubbing.</li>
+      <li><strong>Move In/Move Out ($250):</strong> Deep clean for homes that are being vacated or prepared for new residents. Includes interior cabinets, appliances, and walls.</li>
       <li><strong>Commercial Cleaning:</strong> Customized cleaning for office spaces and small businesses. Please contact us for a quote.</li>
       <li><strong>Recurring Services:</strong> Weekly, bi-weekly, and monthly services at special rates. Contact us to schedule a plan that works for you.</li>
     </ul>
@@ -367,7 +384,11 @@ function showSection(id) {
   const sections = document.querySelectorAll('section');
   sections.forEach(section => section.style.display = 'none');
   const el = document.getElementById(id);
-  if (el) el.style.display = 'block';
+  if (el) {
+    el.style.display = 'block';
+    el.classList.add('flood-bubbles');
+    setTimeout(() => el.classList.remove('flood-bubbles'), 1000);
+  }
   window.location.hash = id;
 }
 window.addEventListener('DOMContentLoaded', () => {
