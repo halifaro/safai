@@ -4,193 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Safai | Pure Products. Powerful Clean.</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
-
-    body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite, animateBackground 20s linear infinite;
-  color: #000000;
+  <style>$1
+.bubble:hover {
+  animation: pop 0.3s ease forwards !important;
+  transform: scale(1.5);
+  opacity: 0;
 }
-    header {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 2rem;
-      text-align: center;
-    }
-    header img {
-      width: 160px;
-      margin-bottom: 1rem;
-    }
-    
-    header p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: #ffffff;
-    }
-    nav {
-      background: #7f5f3c;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav a {
-      color: #fff9f3;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-      background-color: #fff9f3;
-      border-radius: 8px;
-      margin-top: 2rem;
-    }
-    section h2 {
-      border-bottom: 2px solid #7f5f3c;
-      padding-bottom: 0.4rem;
-      margin-bottom: 1.2rem;
-      font-family: 'Playfair Display', serif;
-      color: #7f5f3c;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-    }
-    section h2 img {
-      width: 30px;
-      margin-right: 10px;
-    }
-    ul {
-      line-height: 1.8;
-      font-weight: 500;
-      padding-left: 1.2rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #ffffff;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-    .testimonial {
-      border-left: 4px solid #7f5f3c;
-      padding-left: 1rem;
-      margin-bottom: 1rem;
-      font-style: italic;
-    }
-    .calendly-inline-widget {
-      min-width: 320px;
-      height: 630px;
-    }
-      .fade-in {
-      font-family: 'Playfair Display', serif;
-      font-size: 5.5rem;
-      color: #7f5f3c;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
-    }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-      .fade-in {
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
-    }
-
-    .bigger-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 6rem;
-      color: #7f5f3c;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    section {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: sectionFade 1.2s ease-out forwards;
-    }
-
-    @keyframes sectionFade {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    a[href="#booking"] {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-      .sparkle-icon {
-      font-size: 5rem;
-      color: #c79c4d;
-      animation: sparkle 1.5s infinite ease-in-out;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.8; }
-    }
-  @keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-  @keyframes animateBackground {
-    0% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
-  }
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0));
-  border-radius: 50%;
-  animation: rise 20s infinite ease-in;
-  pointer-events: none;
-  box-shadow: 0 0 12px rgba(255,255,255,0.2);
-  backdrop-filter: blur(2px);
-  opacity: 0.4;
-}
-@keyframes rise {
+@keyframes pop {
   0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.6;
+    transform: scale(1);
+    opacity: 1;
   }
   100% {
-    transform: translateY(-120vh) scale(1.5);
+    transform: scale(1.5);
     opacity: 0;
   }
-}
-</style>
+}</style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
 <script>
