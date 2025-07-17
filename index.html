@@ -8,17 +8,27 @@
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
 
     body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #000000;
-    }
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #000000;
+}
     header {
-      background-color: #efece3;
-      padding: 3rem 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 2rem;
       text-align: center;
+    }
+    header img {
+      width: 160px;
+      margin-bottom: 1rem;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #ffffff;
     }
     nav {
       background: #7f5f3c;
@@ -39,9 +49,6 @@
       background-color: #fff9f3;
       border-radius: 8px;
       margin-top: 2rem;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: sectionFade 1.2s ease-out forwards;
     }
     section h2 {
       border-bottom: 2px solid #7f5f3c;
@@ -77,129 +84,221 @@
       margin-bottom: 1rem;
       font-style: italic;
     }
-    .fade-in {
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 630px;
+    }
+      .fade-in {
       font-family: 'Playfair Display', serif;
-      font-size: 6rem;
-      color: #c79c4d;
+      font-size: 5.5rem;
+      color: #7f5f3c;
       margin: 0;
       letter-spacing: 2px;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+      opacity: 0;
       animation: fadeIn 2s ease-in forwards;
     }
+
     @keyframes fadeIn {
       to {
         opacity: 1;
       }
     }
+      .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    .bigger-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: #7f5f3c;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: sectionFade 1.2s ease-out forwards;
+    }
+
     @keyframes sectionFade {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
     a[href="#booking"] {
       animation: pulse 2s infinite;
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      .sparkle-icon {
+      font-size: 5rem;
+      color: #c79c4d;
+      animation: sparkle 1.5s infinite ease-in-out;
     }
-  </style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script>
-    function initAutocomplete() {
-      const autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'),
-        { types: ['geocode'] }
-      );
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
+  @keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+</style>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async>// Scroll-triggered fade-in for sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1
+});
 
-      document.querySelectorAll('section').forEach(section => {
-        section.style.animationPlayState = 'paused';
-        observer.observe(section);
-      });
-
-      const dateInput = document.getElementById('datePicker');
-      if (dateInput) {
-        dateInput.addEventListener('input', function() {
-          const date = new Date(this.value);
-          const day = date.getUTCDay();
-          if (day !== 5 && day !== 6) {
-            alert('Please select a Friday or Saturday.');
-            this.value = '';
-          }
-        });
-      }
-    });
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
+document.querySelectorAll('section').forEach(section => {
+  section.style.animationPlayState = 'paused';
+  observer.observe(section);
+});
+// Disable non-Friday/Saturday in date picker
+const dateInput = document.getElementById('datePicker');
+dateInput.addEventListener('input', function() {
+  const date = new Date(this.value);
+  const day = date.getUTCDay();
+  if (day !== 5 && day !== 6) {
+    alert('Please select a Friday or Saturday.');
+    this.value = '';
+  }
+});
+  // Google Places Autocomplete for address
+  function initAutocomplete() {
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'),
+      { types: ['geocode'] }
+    );
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
-  <header>
-    <h1 class="fade-in">SAFAI</h1>
-    <p style="font-size: 1.3rem; margin-top: 0.5rem; font-weight: 500;">Pure Products. Powerful Clean.</p>
-    <p style="font-size: 1.1rem; color: #555">✨ Natural. Chemical-Free. Toxin-Free.<br />Safe for babies, pets, and your health.</p>
-  </header>
+  <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
+  <div style="display: inline-block; line-height: 1.2;">
+    <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none; display: inline-flex; align-items: center;">SAFAI </h1>
+    <div style="font-size: 1.1rem; margin-top: 0.5rem; color: #1f1f1f; font-weight: 600; letter-spacing: 1px;">PURE PRODUCTS.<br>POWERFUL CLEAN.</div>
+<div style="font-size: 1rem; color: #7f5f3c; margin-top: 1rem; font-weight: 500; letter-spacing: 0.5px; line-height: 1.4;">✨ Natural. Chemical-Free. Toxin-Free.<br>Safe for babies, pets, and your health.</div>
+  </div>
+</header>
+
   <nav>
     <a href="#about">About</a>
-    <a href="#booking">Book Now</a>
+    <a href="#booking">Book</a>
     <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 
+  <section id="about">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧴</span>Our Mission</h2>
+    <p>
+      At Safai, our mission is to provide exceptional home cleaning services using
+      only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
+    </p>
+  </section>
+
   <section id="booking">
-    <h2>🧼 Book a Cleaning</h2>
-    <form>
-      <label for="name">Name:</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+  <h2><span style="font-size:1.5rem; margin-right:10px;">🧼</span>Book a Cleaning</h2>
+  <form id="bookingForm" style="display: flex; flex-direction: column; gap: 1rem; background-color: #ffffff; padding: 2rem; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); font-family: 'Roboto', sans-serif;">
+    <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Full Name:<input type="text" name="name" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"> </label>
+    <label>Phone Number:<br><input type="tel" name="phone" required></label>
+    <label>Email Address:<br><input type="email" name="email" required></label>
+    <label>Home Address:<br><input type="text" name="address" id="autocomplete" required></label>
+    <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Select Service:<select id="serviceSelect" name="service" onchange="updatePrice()" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+        <option value="standard">Standard Clean - $80</option>
+        <option value="deep">Deep Clean - $150</option>
+        <option value="move">Move-in/Out Clean - $200</option>
+      </select>
+    </label>
+    <label>Preferred Date:<br><input type="date" name="date" id="datePicker" required></label>
+    <label>Preferred Time:<br>
+      <select name="time" required>
+        <option>9:00 AM</option>
+        <option>11:00 AM</option>
+        <option>1:00 PM</option>
+        <option>3:00 PM</option>
+      </select>
+    </label>
+    <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Additional Notes:<textarea name="notes" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></textarea></label>
+    <label><input type="checkbox" name="reminders"> Text me reminders</label>
+    <p><strong>Total: $<span id="totalPrice">80</span></strong></p>
+    <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
+  </form>
+  <p id="thankYouMessage" style="display:none; font-weight: bold; color: green; margin-top: 1rem;">Thank you! Your booking has been received.</p>
+</section>
+<script>
+function updatePrice() {
+  const service = document.getElementById('serviceSelect').value;
+  const priceMap = { standard: 80, deep: 150, move: 200 };
+  document.getElementById('totalPrice').innerText = priceMap[service];
+}
 
-      <label for="phone">Phone:</label><br />
-      <input type="tel" id="phone" name="phone" required /><br /><br />
+const form = document.getElementById('bookingForm');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  // simulate success and show thank you
+  form.style.display = 'none';
+  document.getElementById('thankYouMessage').style.display = 'block';
+  // NOTE: replace this with Stripe Checkout integration in next step
+});
+</script>
 
-      <label for="autocomplete">Address:</label><br />
-      <input id="autocomplete" name="address" placeholder="Enter your address" required /><br /><br />
+  <section id="pricing">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧽</span>Our Pricing</h2>
+    <ul>
+      <li>Standard Clean: $80</li>
+      <li>Deep Clean: $150</li>
+      <li>Move-in/Move-out Clean: $200</li>
+    </ul>
+  </section>
 
-      <label for="datePicker">Preferred Date:</label><br />
-      <input type="date" id="datePicker" name="date" required /><br /><br />
+  <section id="testimonials">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧹</span>What Our Clients Say</h2>
+    <div class="testimonial">
+      "Safai made my home feel brand new — and I love knowing everything is chemical-free!" – Ayesha K.
+    </div>
+    <div class="testimonial">
+      "Professional, punctual, and the cleanest my place has ever been. Highly recommend!" – James P.
+    </div>
+    <div class="testimonial">
+      "The natural products make a big difference for my allergies. Thank you, Safai!" – Lena M.
+    </div>
+  </section>
 
-      <label for="time">Preferred Time:</label><br />
-      <select id="time" name="time" required>
-        <option value="">Select a time</option>
-        <option value="9am">9:00 AM</option>
-        <option value="11am">11:00 AM</option>
-        <option value="1pm">1:00 PM</option>
-        <option value="3pm">3:00 PM</option>
-        <option value="5pm">5:00 PM</option>
-      </select><br /><br />
-
-      <label for="notes">Special Notes:</label><br />
-      <textarea id="notes" name="notes" rows="3"></textarea><br /><br />
-
-      <label><input type="checkbox" name="reminders" /> Send me text reminders</label><br /><br />
-
-      <button type="submit">Confirm Booking</button>
-    </form>
+  <section id="contact">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">📞</span>Contact Us</h2>
+    <p>Email: hello@safai.com<br />Phone: (123) 456-7890</p>
   </section>
 
   <footer>
     &copy; 2025 Safai. All rights reserved.
   </footer>
+<a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
 </body>
 </html>
