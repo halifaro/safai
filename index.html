@@ -166,6 +166,27 @@
     50% { background-position: 100% 100%; }
     100% { background-position: 0% 0%; }
   }
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: rise 20s infinite ease-in;
+  pointer-events: none;
+}
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
 </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
@@ -298,5 +319,18 @@ form.addEventListener('submit', function(e) {
     &copy; 2025 Safai. All rights reserved.
   </footer>
 <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
+<script>
+for (let i = 0; i < 25; i++) {
+  const bubble = document.createElement('div');
+  const size = Math.random() * 30 + 10;
+  bubble.classList.add('bubble');
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+  bubble.style.left = `${Math.random() * 100}%`;
+  bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
+  bubble.style.animationDelay = `${Math.random() * 5}s`;
+  document.body.appendChild(bubble);
+}
+</script>
 </body>
 </html>
