@@ -182,13 +182,22 @@ dateInput.addEventListener('input', function() {
     this.value = '';
   }
 });
+  // Google Places Autocomplete for address
+  function initAutocomplete() {
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'),
+      { types: ['geocode'] }
+    );
+  }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
   <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
   <div style="display: inline-block; line-height: 1.2;">
-    <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none; display: inline-flex; align-items: center;">SAFAI <span class="sparkle-icon" style="margin-left: 12px;">✨</span></h1>
-    <div style="font-size: 1.1rem; margin-top: 0.5rem; color: #1f1f1f; font-weight: 600; letter-spacing: 1px;">PURE PRODUCTS.<br>POWERFUL CLEAN.</div>
+    <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none; display: inline-flex; align-items: center;">SAFAI </h1>
+    $1
+<div style="font-size: 1rem; color: #7f5f3c; margin-top: 0.5rem; font-weight: 500; letter-spacing: 0.5px;">✨ Natural. Chemical-Free. Toxin-Free.<br>Safe for babies, pets, and your health.</div>
   </div>
 </header>
 
@@ -214,7 +223,7 @@ dateInput.addEventListener('input', function() {
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Full Name:<input type="text" name="name" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"> </label>
     <label>Phone Number:<br><input type="tel" name="phone" required></label>
     <label>Email Address:<br><input type="email" name="email" required></label>
-    <label>Home Address:<br><input type="text" name="address" required></label>
+    <label>Home Address:<br><input type="text" name="address" id="autocomplete" required></label>
     <label style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">Select Service:<select id="serviceSelect" name="service" onchange="updatePrice()" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
         <option value="standard">Standard Clean - $80</option>
         <option value="deep">Deep Clean - $150</option>
