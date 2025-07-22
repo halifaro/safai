@@ -65,14 +65,7 @@
       background-color: #fff9f3;
       border-radius: 8px;
       margin-top: 2rem;
-      text-align: justify;
     }
-    section p,
-section ul,
-section li {
-  text-align: justify;
-}
-
     section h2 {
       border-bottom: 2px solid #7f5f3c;
       padding-bottom: 0.4rem;
@@ -272,6 +265,7 @@ function initAutocomplete() {
 </script>
 </head>
 <body>
+  <a href="#maincontent" class="skip-link" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
   <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
   <div style="display: inline-block; line-height: 1.2;">
     <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none; display: inline-flex; align-items: center;">SAFAI </h1>
@@ -437,12 +431,12 @@ function showSection(id) {
     el.style.display = 'block';
     
   }
-  window.location.hash = id;owSection(hash);</script>
+  window.location.hash = id;
 }
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '') || 'about';
 
 
-
-
-
-
-</html></body>});  showSection(hash);</script>  const hash = window.location.hash.replace('#', '') || 'about';window.addEventListener('DOMContentLoaded', () => {</html>
+});  showSection(hash);</script>
+</body>
+</html>
