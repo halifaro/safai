@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Safai provides natural, chemical-free cleaning services that are safe for your family, pets, and the environment. Book top-rated cleaners in Dallas today." />
+  <meta name="keywords" content="natural cleaning, chemical-free home cleaning, eco-friendly cleaning Dallas, Safai, toxin-free cleaners, book cleaning service" />
+  <meta name="author" content="Safai Cleaning Services" />
   <title>Safai | Pure Products. Powerful Clean.</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
-
-    body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite, animateBackground 20s linear infinite;
-  color: #000000;
-}
+    html, body {
+      overflow-x: hidden;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite, animateBackground 20s linear infinite;
+      color: #000;
+    }
     header {
       background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
@@ -194,10 +197,11 @@
 
 
   to { opacity: 0; transform: scale(1.4); }
-</style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
-<script>
+  </style>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+</head>
+<body>
 function initAutocomplete() {
   const input = document.getElementById('autocomplete');
   if (!input) return;
@@ -351,20 +355,21 @@ form.addEventListener('submit', function(e) {
   <footer>
     &copy; 2025 Safai. All rights reserved.
   </footer>
-<a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
-<script>
-for (let i = 0; i < 25; i++) {
-  const bubble = document.createElement('div');
-  const baseSizes = [10, 20, 35];
-  const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
-  bubble.classList.add('bubble');
-  bubble.style.width = ${size}px;
-  bubble.style.height = ${size}px;
-  bubble.style.left = ${Math.random() * 100}%;
-  bubble.style.animationDuration = ${12 + Math.random() * 8}s;
-  bubble.style.animationDelay = 0s;
-  document.body.appendChild(bubble);
-}
+<a href="#booking" class="book-button">Book a Cleaning Service</a>
+
+  <script>
+    // Corrected bubble generator using template literals
+    for (let i = 0; i < 25; i++) {
+      const bubble = document.createElement('div');
+      const baseSizes = [10, 20, 35];
+      const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
+      bubble.classList.add('bubble');
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${12 + Math.random() * 8}s`;
+      document.body.appendChild(bubble);
+    }
 </script>
 <script>
 function showSection(id) {
