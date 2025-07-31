@@ -176,6 +176,7 @@
   backdrop-filter: blur(2px);
   opacity: 0.8;
   cursor: pointer;
+  /* No change needed here for size, handled in JS */
 }
 @keyframes rise {
   0% {
@@ -415,7 +416,8 @@ document.getElementById('paymentMethod').addEventListener('change', function() {
 <script>
 for (let i = 0; i < 25; i++) {
   const bubble = document.createElement('div');
-  const baseSizes = [10, 20, 35];
+  // Make all bubbles bigger by increasing baseSizes
+  const baseSizes = [40, 60, 90]; // was [10, 20, 35]
   const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
   bubble.classList.add('bubble');
   bubble.style.width = size + 'px';
@@ -458,5 +460,5 @@ window.addEventListener('hashchange', () => {
   showSection(hash);
 });
 </script>
-</body>
-</html>
+
+</html></html>
