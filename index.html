@@ -329,6 +329,16 @@ function initAutocomplete() {
   <label for="remindersCheck" style="font-weight: 600; color: #7f5f3c;">
     <input id="remindersCheck" type="checkbox" name="reminders" required style="margin-right: 6px;"> Text me reminders
   </label>
+  <label for="paymentMethod" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Payment Method:
+    <select id="paymentMethod" name="paymentMethod" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+      <option value="cash">Pay in cash on day of service</option>
+      <option value="stripe">Pay now and confirm booking</option>
+    </select>
+  </label>
+  <p id="stripePayNow" style="display:none;">
+    <a href="https://checkout.stripe.com/pay/YOUR_STRIPE_CHECKOUT_LINK" target="_blank" rel="noopener" style="background-color:#7f5f3c;color:#fff;padding:0.7rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:1rem;">Pay Now & Confirm Booking</a>
+  </p>
   <p><strong>Total: $<span id="totalPrice">150</span></strong></p>
   <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
 </form>
@@ -356,6 +366,14 @@ form.addEventListener('submit', function(e) {
   form.style.display = 'none';
   document.getElementById('thankYouMessage').style.display = 'block';
   // NOTE: replace this with Stripe Checkout integration in next step
+});
+document.getElementById('paymentMethod').addEventListener('change', function() {
+  const stripePayNow = document.getElementById('stripePayNow');
+  if (this.value === 'stripe') {
+    stripePayNow.style.display = 'block';
+  } else {
+    stripePayNow.style.display = 'none';
+  }
 });
 </script>
 
@@ -415,11 +433,15 @@ function showSection(id) {
   const el = document.getElementById(id);
   if (el) {
     el.style.display = 'block';
-    
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Add this line
   }
   window.location.hash = id;
 }
 window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '') || 'about';
+  showSection(hash);
+});
+window.addEventListener('hashchange', () => {
   const hash = window.location.hash.replace('#', '') || 'about';
   showSection(hash);
 });
