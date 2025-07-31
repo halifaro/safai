@@ -169,10 +169,12 @@
 .bubble {
   position: absolute;
   bottom: -100px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
+  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.85), rgba(255, 215, 0, 0.25), rgba(255,255,255,0.2));
+  /* Gold hue: rgba(255, 215, 0, ...) is gold */
   border-radius: 50%;
   animation: rise 20s infinite ease-in;
-  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  box-shadow: 0 0 24px 6px rgba(199, 156, 77, 0.25),
+  0 0 12px rgba(255,255,255,0.2);
   backdrop-filter: blur(2px);
   opacity: 0.8;
   cursor: pointer;
@@ -414,40 +416,41 @@ document.getElementById('paymentMethod').addEventListener('change', function() {
   </footer>
 <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
 <script>
-for (let i = 0; i < 25; i++) {
-  const bubble = document.createElement('div');
-  // Make all bubbles bigger by increasing baseSizes
-  const baseSizes = [40, 60, 90]; // was [10, 20, 35]
-  const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
-  bubble.classList.add('bubble');
-  bubble.style.width = size + 'px';
-  bubble.style.height = size + 'px';
-  bubble.style.left = Math.random() * 100 + '%';
-  bubble.style.animationDuration = (12 + Math.random() * 8) + 's';
-  bubble.style.animationDelay = '0s';
+function createBubbles() {
+  // Remove existing bubbles
+  document.querySelectorAll('.bubble').forEach(b => b.remove());
+  for (let i = 0; i < 25; i++) {
+    const bubble = document.createElement('div');
+    const baseSizes = [40, 60, 90];
+    const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
+    bubble.classList.add('bubble');
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = Math.random() * 100 + '%';
+    bubble.style.animationDuration = (12 + Math.random() * 8) + 's';
+    bubble.style.animationDelay = '0s';
 
-  // Add pop effect on mouseover
-  bubble.addEventListener('mouseenter', function () {
-    bubble.style.transition = 'transform 0.2s, opacity 0.2s';
-    bubble.style.transform = 'scale(1.5)';
-    bubble.style.opacity = '0';
-    setTimeout(() => {
-      bubble.remove();
-    }, 200);
-  });
+    // Add pop effect on mouseover
+    bubble.addEventListener('mouseenter', function () {
+      bubble.style.transition = 'transform 0.2s, opacity 0.2s';
+      bubble.style.transform = 'scale(1.5)';
+      bubble.style.opacity = '0';
+      setTimeout(() => {
+        bubble.remove();
+      }, 200);
+    });
 
-  document.body.appendChild(bubble);
+    document.body.appendChild(bubble);
+  }
 }
-</script>
-<script>
+
 function showSection(id) {
   const sections = document.querySelectorAll('section');
   sections.forEach(section => section.style.display = 'none');
   const el = document.getElementById(id);
   if (el) {
     el.style.display = 'block';
-    // Remove scrollTo to prevent scrolling on section open
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    createBubbles(); // Bubbles appear when a section is opened
   }
   window.location.hash = id;
 }
