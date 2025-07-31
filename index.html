@@ -435,13 +435,7 @@ function createBubbles() {
   // Remove existing bubbles
   document.querySelectorAll('.bubble').forEach(b => b.remove());
 
-  // Set how many bubbles per row and column
-  const rows = 5;
-  const cols = 5;
-  const total = rows * cols;
-  const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
+  const total = 25;
   for (let i = 0; i < total; i++) {
     const bubble = document.createElement('div');
     const baseSizes = [40, 60, 90];
@@ -449,18 +443,10 @@ function createBubbles() {
     bubble.classList.add('bubble');
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
-
-    // Calculate grid position
-    const row = Math.floor(i / cols);
-    const col = i % cols;
-    // Add a little random offset so it's not too uniform
-    const x = ((col + 0.5) / cols) * vw + (Math.random() - 0.5) * 40;
-    const y = ((row + 0.5) / rows) * vh + (Math.random() - 0.5) * 40;
-
-    bubble.style.left = `${x - size / 2}px`;
-    bubble.style.top = `${y - size / 2}px`;
-    bubble.style.bottom = 'auto'; // override bottom so top works
-    bubble.style.animation = 'none'; // disable rise animation for static grid
+    bubble.style.left = Math.random() * 100 + '%';
+    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+    bubble.style.bottom = '-100px';
+    bubble.style.top = '';
 
     // Add pop effect on mouseover
     bubble.addEventListener('mouseenter', function () {
