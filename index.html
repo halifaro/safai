@@ -176,6 +176,7 @@
   box-shadow: 0 0 12px rgba(255,255,255,0.2);
   backdrop-filter: blur(2px);
   opacity: 0.8;
+  cursor: pointer;
 }
 @keyframes rise {
   0% {
@@ -423,6 +424,17 @@ for (let i = 0; i < 25; i++) {
   bubble.style.left = Math.random() * 100 + '%';
   bubble.style.animationDuration = (12 + Math.random() * 8) + 's';
   bubble.style.animationDelay = '0s';
+
+  // Add pop effect on mouseover
+  bubble.addEventListener('mouseenter', function () {
+    bubble.style.transition = 'transform 0.2s, opacity 0.2s';
+    bubble.style.transform = 'scale(1.5)';
+    bubble.style.opacity = '0';
+    setTimeout(() => {
+      bubble.remove();
+    }, 200);
+  });
+
   document.body.appendChild(bubble);
 }
 </script>
@@ -433,7 +445,8 @@ function showSection(id) {
   const el = document.getElementById(id);
   if (el) {
     el.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Add this line
+    // Remove scrollTo to prevent scrolling on section open
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   window.location.hash = id;
 }
