@@ -169,16 +169,14 @@
 .bubble {
   position: absolute;
   bottom: -100px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.85), rgba(255, 215, 0, 0.25), rgba(255,255,255,0.2));
-  /* Gold hue: rgba(255, 215, 0, ...) is gold */
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
+  /* Removed gold hue, now bubbles are white/silver */
   border-radius: 50%;
   animation: rise 20s infinite ease-in;
-  box-shadow: 0 0 24px 6px rgba(199, 156, 77, 0.25),
-  0 0 12px rgba(255,255,255,0.2);
+  box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
   backdrop-filter: blur(2px);
   opacity: 0.8;
   cursor: pointer;
-  /* No change needed here for size, handled in JS */
 }
 @keyframes rise {
   0% {
@@ -197,6 +195,23 @@
 
 
   to { opacity: 0; transform: scale(1.4); }
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  80% {
+    transform: scale(1.7);
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+    filter: blur(4px);
+  }
 }
 </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -419,25 +434,40 @@ document.getElementById('paymentMethod').addEventListener('change', function() {
 function createBubbles() {
   // Remove existing bubbles
   document.querySelectorAll('.bubble').forEach(b => b.remove());
-  for (let i = 0; i < 25; i++) {
+
+  // Set how many bubbles per row and column
+  const rows = 5;
+  const cols = 5;
+  const total = rows * cols;
+  const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+  for (let i = 0; i < total; i++) {
     const bubble = document.createElement('div');
     const baseSizes = [40, 60, 90];
     const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
     bubble.classList.add('bubble');
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
-    bubble.style.left = Math.random() * 100 + '%';
-    bubble.style.animationDuration = (12 + Math.random() * 8) + 's';
-    bubble.style.animationDelay = '0s';
+
+    // Calculate grid position
+    const row = Math.floor(i / cols);
+    const col = i % cols;
+    // Add a little random offset so it's not too uniform
+    const x = ((col + 0.5) / cols) * vw + (Math.random() - 0.5) * 40;
+    const y = ((row + 0.5) / rows) * vh + (Math.random() - 0.5) * 40;
+
+    bubble.style.left = `${x - size / 2}px`;
+    bubble.style.top = `${y - size / 2}px`;
+    bubble.style.bottom = 'auto'; // override bottom so top works
+    bubble.style.animation = 'none'; // disable rise animation for static grid
 
     // Add pop effect on mouseover
     bubble.addEventListener('mouseenter', function () {
-      bubble.style.transition = 'transform 0.2s, opacity 0.2s';
-      bubble.style.transform = 'scale(1.5)';
-      bubble.style.opacity = '0';
+      bubble.style.animation = 'pop 0.25s forwards';
       setTimeout(() => {
         bubble.remove();
-      }, 200);
+      }, 250);
     });
 
     document.body.appendChild(bubble);
