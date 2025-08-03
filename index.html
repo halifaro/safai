@@ -441,62 +441,75 @@ function createBubbles() {
   );
   if (!section) return;
 
-  // Get section's bounding rectangle
+  // Get section's bounding rectangle and window size
   const rect = section.getBoundingClientRect();
+  const minSize = 18, maxSize = 36;
+  const bubbleSpacing = 5; // px, controls density
 
-  const bubblesPerSide = 14; // Number of bubbles per side
-const minSize = 18, maxSize = 36; // Make bubbles smaller
+  // Fill left side
+  for (
+    let y = rect.top + window.scrollY;
+    y < rect.bottom + window.scrollY;
+    y += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+  ) {
+    for (
+      let x = window.scrollX;
+      x < rect.left + window.scrollX - minSize;
+      x += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+    ) {
+      const size = minSize + Math.random() * (maxSize - minSize);
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = `${x}px`;
+      bubble.style.top = `${y}px`;
+      bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+      bubble.style.bottom = 'auto';
+      bubble.style.right = 'auto';
 
-  // Left side (more scattered)
-  for (let i = 0; i < bubblesPerSide; i++) {
-    const bubble = document.createElement('div');
-    const size = minSize + Math.random() * (maxSize - minSize);
-    bubble.classList.add('bubble');
-    bubble.style.width = size + 'px';
-    bubble.style.height = size + 'px';
-    // Scatter horizontally a bit and vertically a lot
-    const x = rect.left - size - 10 + window.scrollX + (Math.random() - 0.5) * 30;
-    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 60;
-    bubble.style.left = `${x}px`;
-    bubble.style.top = `${y}px`;
-    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
-    bubble.style.bottom = 'auto';
-    bubble.style.right = 'auto';
+      bubble.addEventListener('mouseenter', function () {
+        bubble.style.animation = 'pop 0.25s forwards';
+        setTimeout(() => {
+          bubble.remove();
+        }, 250);
+      });
 
-    bubble.addEventListener('mouseenter', function () {
-      bubble.style.animation = 'pop 0.25s forwards';
-      setTimeout(() => {
-        bubble.remove();
-      }, 250);
-    });
-
-    document.body.appendChild(bubble);
+      document.body.appendChild(bubble);
+    }
   }
 
-  // Right side (more scattered)
-  for (let i = 0; i < bubblesPerSide; i++) {
-    const bubble = document.createElement('div');
-    const size = minSize + Math.random() * (maxSize - minSize);
-    bubble.classList.add('bubble');
-    bubble.style.width = size + 'px';
-    bubble.style.height = size + 'px';
-    // Scatter horizontally a bit and vertically a lot
-    const x = rect.right + 10 + window.scrollX + (Math.random() - 0.5) * 30;
-    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 60;
-    bubble.style.left = `${x}px`;
-    bubble.style.top = `${y}px`;
-    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
-    bubble.style.bottom = 'auto';
-    bubble.style.right = 'auto';
+  // Fill right side
+  for (
+    let y = rect.top + window.scrollY;
+    y < rect.bottom + window.scrollY;
+    y += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+  ) {
+    for (
+      let x = rect.right + window.scrollX + 10;
+      x < window.innerWidth + window.scrollX - minSize;
+      x += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+    ) {
+      const size = minSize + Math.random() * (maxSize - minSize);
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = `${x}px`;
+      bubble.style.top = `${y}px`;
+      bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+      bubble.style.bottom = 'auto';
+      bubble.style.right = 'auto';
 
-    bubble.addEventListener('mouseenter', function () {
-      bubble.style.animation = 'pop 0.25s forwards';
-      setTimeout(() => {
-        bubble.remove();
-      }, 250);
-    });
+      bubble.addEventListener('mouseenter', function () {
+        bubble.style.animation = 'pop 0.25s forwards';
+        setTimeout(() => {
+          bubble.remove();
+        }, 250);
+      });
 
-    document.body.appendChild(bubble);
+      document.body.appendChild(bubble);
+    }
   }
 }
 </script>
