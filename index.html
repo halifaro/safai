@@ -444,7 +444,7 @@ function createBubbles() {
   // Get section's bounding rectangle and window size
   const rect = section.getBoundingClientRect();
   const minSize = 18, maxSize = 36;
-  const bubbleSpacing = 5; // px, controls density
+  const bubbleSpacing = 10; // Increase spacing for fewer bubbles
 
   // Fill left side
   for (
@@ -455,7 +455,7 @@ function createBubbles() {
     for (
       let x = window.scrollX;
       x < rect.left + window.scrollX - minSize;
-      x += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+      x += (minSize + bubbleSpacing + Math.random() * (maxSize - minSize)) * 1.5 // Fewer bubbles horizontally
     ) {
       const size = minSize + Math.random() * (maxSize - minSize);
       const bubble = document.createElement('div');
@@ -488,7 +488,7 @@ function createBubbles() {
     for (
       let x = rect.right + window.scrollX + 10;
       x < window.innerWidth + window.scrollX - minSize;
-      x += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+      x += (minSize + bubbleSpacing + Math.random() * (maxSize - minSize)) * 1.5 // Fewer bubbles horizontally
     ) {
       const size = minSize + Math.random() * (maxSize - minSize);
       const bubble = document.createElement('div');
