@@ -447,7 +447,7 @@ function createBubbles() {
   const bubblesPerSide = 12; // Number of bubbles per side (adjust as needed)
   const minSize = 40, maxSize = 90;
 
-  // Left side
+  // Left side (scattered)
   for (let i = 0; i < bubblesPerSide; i++) {
     const bubble = document.createElement('div');
     const size = minSize + Math.random() * (maxSize - minSize);
@@ -455,7 +455,9 @@ function createBubbles() {
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
     bubble.style.left = `${rect.left - size - 10 + window.scrollX}px`;
-    bubble.style.top = `${rect.top + (rect.height * (i + 0.5) / bubblesPerSide) - size / 2 + window.scrollY}px`;
+    // Scatter vertically along the section, with random offset
+    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 30;
+    bubble.style.top = `${y - size / 2}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
     bubble.style.bottom = 'auto';
     bubble.style.right = 'auto';
@@ -470,7 +472,7 @@ function createBubbles() {
     document.body.appendChild(bubble);
   }
 
-  // Right side
+  // Right side (scattered)
   for (let i = 0; i < bubblesPerSide; i++) {
     const bubble = document.createElement('div');
     const size = minSize + Math.random() * (maxSize - minSize);
@@ -478,7 +480,9 @@ function createBubbles() {
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
     bubble.style.left = `${rect.right + 10 + window.scrollX}px`;
-    bubble.style.top = `${rect.top + (rect.height * (i + 0.5) / bubblesPerSide) - size / 2 + window.scrollY}px`;
+    // Scatter vertically along the section, with random offset
+    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 30;
+    bubble.style.top = `${y - size / 2}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
     bubble.style.bottom = 'auto';
     bubble.style.right = 'auto';
