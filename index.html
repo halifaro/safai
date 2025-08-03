@@ -443,7 +443,6 @@ function createBubbles() {
 
   // Get section's bounding rectangle
   const rect = section.getBoundingClientRect();
-  const bodyRect = document.body.getBoundingClientRect();
 
   const bubblesPerSide = 12; // Number of bubbles per side (adjust as needed)
   const minSize = 40, maxSize = 90;
@@ -480,52 +479,6 @@ function createBubbles() {
     bubble.style.height = size + 'px';
     bubble.style.left = `${rect.right + 10 + window.scrollX}px`;
     bubble.style.top = `${rect.top + (rect.height * (i + 0.5) / bubblesPerSide) - size / 2 + window.scrollY}px`;
-    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
-    bubble.style.bottom = 'auto';
-    bubble.style.right = 'auto';
-
-    bubble.addEventListener('mouseenter', function () {
-      bubble.style.animation = 'pop 0.25s forwards';
-      setTimeout(() => {
-        bubble.remove();
-      }, 250);
-    });
-
-    document.body.appendChild(bubble);
-  }
-
-  // Top side
-  for (let i = 0; i < Math.floor(bubblesPerSide / 2); i++) {
-    const bubble = document.createElement('div');
-    const size = minSize + Math.random() * (maxSize - minSize);
-    bubble.classList.add('bubble');
-    bubble.style.width = size + 'px';
-    bubble.style.height = size + 'px';
-    bubble.style.left = `${rect.left + (rect.width * (i + 0.5) / (bubblesPerSide / 2)) - size / 2 + window.scrollX}px`;
-    bubble.style.top = `${rect.top - size - 10 + window.scrollY}px`;
-    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
-    bubble.style.bottom = 'auto';
-    bubble.style.right = 'auto';
-
-    bubble.addEventListener('mouseenter', function () {
-      bubble.style.animation = 'pop 0.25s forwards';
-      setTimeout(() => {
-        bubble.remove();
-      }, 250);
-    });
-
-    document.body.appendChild(bubble);
-  }
-
-  // Bottom side
-  for (let i = 0; i < Math.floor(bubblesPerSide / 2); i++) {
-    const bubble = document.createElement('div');
-    const size = minSize + Math.random() * (maxSize - minSize);
-    bubble.classList.add('bubble');
-    bubble.style.width = size + 'px';
-    bubble.style.height = size + 'px';
-    bubble.style.left = `${rect.left + (rect.width * (i + 0.5) / (bubblesPerSide / 2)) - size / 2 + window.scrollX}px`;
-    bubble.style.top = `${rect.bottom + 10 + window.scrollY}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
     bubble.style.bottom = 'auto';
     bubble.style.right = 'auto';
