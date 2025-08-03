@@ -444,8 +444,8 @@ function createBubbles() {
   // Get section's bounding rectangle
   const rect = section.getBoundingClientRect();
 
-  const bubblesPerSide = 14; // Increase for more bubbles
-  const minSize = 40, maxSize = 90;
+  const bubblesPerSide = 14; // Number of bubbles per side
+const minSize = 18, maxSize = 36; // Make bubbles smaller
 
   // Left side (more scattered)
   for (let i = 0; i < bubblesPerSide; i++) {
