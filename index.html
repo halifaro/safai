@@ -444,18 +444,18 @@ function createBubbles() {
   // Get section's bounding rectangle and window size
   const rect = section.getBoundingClientRect();
   const minSize = 18, maxSize = 36;
-  const bubbleSpacing = 10; // Increase spacing for fewer bubbles
+  const bubbleSpacing = 32; // Larger spacing = fewer bubbles
 
   // Fill left side
   for (
     let y = rect.top + window.scrollY;
     y < rect.bottom + window.scrollY;
-    y += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+    y += minSize + bubbleSpacing
   ) {
     for (
       let x = window.scrollX;
       x < rect.left + window.scrollX - minSize;
-      x += (minSize + bubbleSpacing + Math.random() * (maxSize - minSize)) * 1.5 // Fewer bubbles horizontally
+      x += (minSize + bubbleSpacing) * 2 // Even fewer bubbles horizontally
     ) {
       const size = minSize + Math.random() * (maxSize - minSize);
       const bubble = document.createElement('div');
@@ -464,7 +464,7 @@ function createBubbles() {
       bubble.style.height = size + 'px';
       bubble.style.left = `${x}px`;
       bubble.style.top = `${y}px`;
-      bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+      bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`; // Shorter duration
       bubble.style.bottom = 'auto';
       bubble.style.right = 'auto';
 
@@ -483,12 +483,12 @@ function createBubbles() {
   for (
     let y = rect.top + window.scrollY;
     y < rect.bottom + window.scrollY;
-    y += minSize + bubbleSpacing + Math.random() * (maxSize - minSize)
+    y += minSize + bubbleSpacing
   ) {
     for (
       let x = rect.right + window.scrollX + 10;
       x < window.innerWidth + window.scrollX - minSize;
-      x += (minSize + bubbleSpacing + Math.random() * (maxSize - minSize)) * 1.5 // Fewer bubbles horizontally
+      x += (minSize + bubbleSpacing) * 2
     ) {
       const size = minSize + Math.random() * (maxSize - minSize);
       const bubble = document.createElement('div');
@@ -497,7 +497,7 @@ function createBubbles() {
       bubble.style.height = size + 'px';
       bubble.style.left = `${x}px`;
       bubble.style.top = `${y}px`;
-      bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+      bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
       bubble.style.bottom = 'auto';
       bubble.style.right = 'auto';
 
