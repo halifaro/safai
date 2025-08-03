@@ -444,20 +444,21 @@ function createBubbles() {
   // Get section's bounding rectangle
   const rect = section.getBoundingClientRect();
 
-  const bubblesPerSide = 12; // Number of bubbles per side (adjust as needed)
+  const bubblesPerSide = 14; // Increase for more bubbles
   const minSize = 40, maxSize = 90;
 
-  // Left side (scattered)
+  // Left side (more scattered)
   for (let i = 0; i < bubblesPerSide; i++) {
     const bubble = document.createElement('div');
     const size = minSize + Math.random() * (maxSize - minSize);
     bubble.classList.add('bubble');
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
-    bubble.style.left = `${rect.left - size - 10 + window.scrollX}px`;
-    // Scatter vertically along the section, with random offset
-    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 30;
-    bubble.style.top = `${y - size / 2}px`;
+    // Scatter horizontally a bit and vertically a lot
+    const x = rect.left - size - 10 + window.scrollX + (Math.random() - 0.5) * 30;
+    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 60;
+    bubble.style.left = `${x}px`;
+    bubble.style.top = `${y}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
     bubble.style.bottom = 'auto';
     bubble.style.right = 'auto';
@@ -472,17 +473,18 @@ function createBubbles() {
     document.body.appendChild(bubble);
   }
 
-  // Right side (scattered)
+  // Right side (more scattered)
   for (let i = 0; i < bubblesPerSide; i++) {
     const bubble = document.createElement('div');
     const size = minSize + Math.random() * (maxSize - minSize);
     bubble.classList.add('bubble');
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
-    bubble.style.left = `${rect.right + 10 + window.scrollX}px`;
-    // Scatter vertically along the section, with random offset
-    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 30;
-    bubble.style.top = `${y - size / 2}px`;
+    // Scatter horizontally a bit and vertically a lot
+    const x = rect.right + 10 + window.scrollX + (Math.random() - 0.5) * 30;
+    const y = rect.top + Math.random() * rect.height + window.scrollY + (Math.random() - 0.5) * 60;
+    bubble.style.left = `${x}px`;
+    bubble.style.top = `${y}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
     bubble.style.bottom = 'auto';
     bubble.style.right = 'auto';
