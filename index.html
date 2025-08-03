@@ -435,20 +435,101 @@ function createBubbles() {
   // Remove existing bubbles
   document.querySelectorAll('.bubble').forEach(b => b.remove());
 
-  const total = 25;
-  for (let i = 0; i < total; i++) {
+  // Find the currently visible section
+  const section = Array.from(document.querySelectorAll('section')).find(
+    s => s.style.display !== 'none'
+  );
+  if (!section) return;
+
+  // Get section's bounding rectangle
+  const rect = section.getBoundingClientRect();
+  const bodyRect = document.body.getBoundingClientRect();
+
+  const bubblesPerSide = 12; // Number of bubbles per side (adjust as needed)
+  const minSize = 40, maxSize = 90;
+
+  // Left side
+  for (let i = 0; i < bubblesPerSide; i++) {
     const bubble = document.createElement('div');
-    const baseSizes = [40, 60, 90];
-    const size = baseSizes[Math.floor(Math.random() * baseSizes.length)];
+    const size = minSize + Math.random() * (maxSize - minSize);
     bubble.classList.add('bubble');
     bubble.style.width = size + 'px';
     bubble.style.height = size + 'px';
-    bubble.style.left = Math.random() * 100 + '%';
+    bubble.style.left = `${rect.left - size - 10 + window.scrollX}px`;
+    bubble.style.top = `${rect.top + (rect.height * (i + 0.5) / bubblesPerSide) - size / 2 + window.scrollY}px`;
     bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
-    bubble.style.bottom = '-100px';
-    bubble.style.top = '';
+    bubble.style.bottom = 'auto';
+    bubble.style.right = 'auto';
 
-    // Add pop effect on mouseover
+    bubble.addEventListener('mouseenter', function () {
+      bubble.style.animation = 'pop 0.25s forwards';
+      setTimeout(() => {
+        bubble.remove();
+      }, 250);
+    });
+
+    document.body.appendChild(bubble);
+  }
+
+  // Right side
+  for (let i = 0; i < bubblesPerSide; i++) {
+    const bubble = document.createElement('div');
+    const size = minSize + Math.random() * (maxSize - minSize);
+    bubble.classList.add('bubble');
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = `${rect.right + 10 + window.scrollX}px`;
+    bubble.style.top = `${rect.top + (rect.height * (i + 0.5) / bubblesPerSide) - size / 2 + window.scrollY}px`;
+    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+    bubble.style.bottom = 'auto';
+    bubble.style.right = 'auto';
+
+    bubble.addEventListener('mouseenter', function () {
+      bubble.style.animation = 'pop 0.25s forwards';
+      setTimeout(() => {
+        bubble.remove();
+      }, 250);
+    });
+
+    document.body.appendChild(bubble);
+  }
+
+  // Top side
+  for (let i = 0; i < Math.floor(bubblesPerSide / 2); i++) {
+    const bubble = document.createElement('div');
+    const size = minSize + Math.random() * (maxSize - minSize);
+    bubble.classList.add('bubble');
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = `${rect.left + (rect.width * (i + 0.5) / (bubblesPerSide / 2)) - size / 2 + window.scrollX}px`;
+    bubble.style.top = `${rect.top - size - 10 + window.scrollY}px`;
+    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+    bubble.style.bottom = 'auto';
+    bubble.style.right = 'auto';
+
+    bubble.addEventListener('mouseenter', function () {
+      bubble.style.animation = 'pop 0.25s forwards';
+      setTimeout(() => {
+        bubble.remove();
+      }, 250);
+    });
+
+    document.body.appendChild(bubble);
+  }
+
+  // Bottom side
+  for (let i = 0; i < Math.floor(bubblesPerSide / 2); i++) {
+    const bubble = document.createElement('div');
+    const size = minSize + Math.random() * (maxSize - minSize);
+    bubble.classList.add('bubble');
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = `${rect.left + (rect.width * (i + 0.5) / (bubblesPerSide / 2)) - size / 2 + window.scrollX}px`;
+    bubble.style.top = `${rect.bottom + 10 + window.scrollY}px`;
+    bubble.style.animation = `rise ${12 + Math.random() * 8}s infinite ease-in`;
+    bubble.style.bottom = 'auto';
+    bubble.style.right = 'auto';
+
     bubble.addEventListener('mouseenter', function () {
       bubble.style.animation = 'pop 0.25s forwards';
       setTimeout(() => {
@@ -459,7 +540,9 @@ function createBubbles() {
     document.body.appendChild(bubble);
   }
 }
+</script>
 
+<script>
 function showSection(id) {
   const sections = document.querySelectorAll('section');
   sections.forEach(section => section.style.display = 'none');
