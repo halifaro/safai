@@ -1,110 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dallas $1M Home Giveaway</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safai | Pure Products. Powerful Clean.</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .wrapper {
-      background: #fff;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(-45deg, #efece3, #f5f2e9, #efece3, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite, animateBackground 20s linear infinite;
+  color: #000000;
+}
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 100%;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-    }
-    p {
-      margin: 0.5rem 0 1.5rem;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 0.75rem;
+    header img {
+      width: 160px;
       margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
     }
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      background: #0070f3;
-      color: #fff;
+    
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #ffffff;
     }
-    button:disabled {
-      background: #999;
-      cursor: default;
+    nav {
+      background: #7f5f3c;
+      padding: 1rem;
+      text-align: center;
     }
-  </style>
+    nav a {
+      color: #fff9f3;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff9f3;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    section h2 {
+      border-bottom: 2px solid #7f5f3c;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      color: #7f5f3c;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    section h2 img {
+      width: 30px;
+      margin-right: 10px;
+    }
+    ul {
+      line-height: 1.8;
+      font-weight: 500;
+      padding-left: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+    .testimonial {
+      border-left: 4px solid #7f5f3c;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 630px;
+    }
+      .fade-in {
+      font-family: 'Playfair Display', serif;
+      font-size: 5.5rem;
+      color: #7f5f3c;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+      .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    .bigger-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: #7f5f3c;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: sectionFade 1.2s ease-out forwards;
+    }
+
+    @keyframes sectionFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    a[href="#booking"] {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+      .sparkle-icon {
+      font-size: 5rem;
+      color: #c79c4d;
+      animation: sparkle 1.5s infinite ease-in-out;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+  @keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+  @keyframes animateBackground {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background: radial-gradient(circle at 30% 30%, rgba(120,180,255,0.85), rgba(120,180,255,0.25), rgba(255,255,255,0.2));
+  /* Bluish hue: rgba(120,180,255,...) is a soft blue */
+  border-radius: 50%;
+  animation: rise 20s infinite ease-in;
+  box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
+  backdrop-filter: blur(2px);
+  opacity: 0.8;
+  cursor: pointer;
+}
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+
+
+  to { opacity: 0; transform: scale(1.4); }
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  80% {
+    transform: scale(1.7);
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+</style>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
+<script>
+function initAutocomplete() {
+  const input = document.getElementById('autocomplete');
+  if (!input) return;
+
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['geocode'],
+    componentRestrictions: { country: 'us' }
+  });
+
+  const dallasBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(32.6, -97.0),
+    new google.maps.LatLng(33.1, -96.5)
+  );
+  autocomplete.setBounds(dallasBounds);
+
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('.pac-container').forEach(container => {
+      container.style.fontFamily = 'Roboto, sans-serif';
+      container.style.borderRadius = '6px';
+      container.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+      container.style.zIndex = '9999';
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Safai",
+  "telephone": "(469) 665-9991",
+  "email": "bookwithsafai@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dallas",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "url": "https://yourdomain.com/",
+  "description": "All-natural, chemical-free, and toxin-free cleaning services for homes and businesses in Dallas."
+}
+</script>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>$1,000,000 Home Giveaway</h1>
-    <p>Win a $1,000,000 home in Dallas, TX!<br>
-       Entry is $1. Winner announced 12/31/2025.</p>
-    <form id="giveaway-form">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <button type="button" id="enter-btn">Pay $1 &amp; Enter</button>
-    </form>
+  <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
+  <div style="display: inline-block; line-height: 1.2;">
+    <h1 class="fade-in bigger-logo" style="font-family: 'Playfair Display', serif; font-size: 6rem; color: #c79c4d; margin: 0; letter-spacing: 1.5px; text-shadow: none; display: inline-flex; align-items: center;">SAFAI </h1>
+    <div style="font-size: 1.1rem; margin-top: 0.5rem; color: #1f1f1f; font-weight: 600; letter-spacing: 1px;">PURE PRODUCTS.<br>POWERFUL CLEAN.</div>
+<div style="font-size: 1rem; color: #7f5f3c; margin-top: 1rem; font-weight: 500; letter-spacing: 0.5px; line-height: 1.4;">✨ Natural. Chemical-Free. Toxin-Free.<br>Safe for babies, pets, and your health.</div>
   </div>
+</header>
 
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    // Initialize Stripe.js with your publishable key
-    const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY');
+  <nav>
+  <a href="#about" onclick="showSection('about')">About</a>
+  <a href="#booking" onclick="showSection('booking')">Book</a>
+  <a href="#pricing" onclick="showSection('pricing')">Pricing</a>
+  <a href="#testimonials" onclick="showSection('testimonials')">Testimonials</a>
+  <a href="#contact" onclick="showSection('contact')">Contact</a>
+</nav>
 
-    const enterButton = document.getElementById('enter-btn');
-    enterButton.addEventListener('click', async () => {
-      const name  = document.querySelector('[name=name]').value.trim();
-      const email = document.querySelector('[name=email]').value.trim();
+  <section id="about" style="display: none;">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧴</span>Our Mission</h2>
+    <p>
+      At Safai, our mission is to provide exceptional home cleaning services using
+      only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
+    </p>
+    <h3 style="margin-top: 2rem; color: #7f5f3c;">Our Services</h3>
+    <ul>
+      <li><strong>Under 3 Bedrooms :</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
+      <li><strong>4+ Bedrooms :</strong> Thorough top-to-bottom clean for larger homes with more living space and bathrooms.</li>
+      <li><strong>Deep Cleaning under 3 bedrooms :</strong> In-depth cleaning of all surfaces, including baseboards, appliances, and inside cabinets for single-level homes.</li>
+      <li><strong>Deep Cleaning 4+ bedrooms :</strong> Full-detail cleaning for multi-story houses. Includes staircases, high-touch areas, and detailed scrubbing.</li>
+      <li><strong>Move In/Move Out :</strong> Deep clean for homes that are being vacated or prepared for new residents. Includes interior cabinets, appliances, and walls.</li>
+      <li><strong>Commercial Cleaning:</strong> Customized cleaning for office spaces and small businesses. Please contact us for a quote.</li>
+      <li><strong>Recurring Services:</strong> Weekly, bi-weekly, and monthly services at special rates. Contact us to schedule a plan that works for you.</li>
+    </ul>
+  </section>
 
-      if (!name || !email) {
-        alert('Please enter both your name and email.');
-        return;
-      }
+  <section id="booking" style="display: none;">
+  <h2><span style="font-size:1.5rem; margin-right:10px;">🧼</span>Book a Cleaning</h2>
+  <form id="bookingForm" style="display: flex; flex-direction: column; gap: 1rem; background-color: #ffffff; padding: 2rem; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); font-family: 'Roboto', sans-serif;">
+  <label for="nameInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Full Name:
+    <input id="nameInput" type="text" name="name" required autocomplete="name" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+  </label>
+  <label for="phoneInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Phone Number:
+    <input id="phoneInput" type="tel" name="phone" required autocomplete="tel" placeholder="(123) 456-7890" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+  </label>
+  <label for="emailInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Email Address:
+    <input id="emailInput" type="email" name="email" required autocomplete="email" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+  </label>
+  <label for="autocomplete" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Home Address:
+    <input id="autocomplete" type="text" name="address" required autocomplete="street-address" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+  </label>
+  <label for="serviceSelect" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Select Service:
+    <select id="serviceSelect" name="service" onchange="updatePrice()" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+      <option value="under3">Under 3 bedrooms - $150</option>
+      <option value="4plus">4+ bedrooms - $300</option>
+      <option value="deep1">Deep cleaning under 3 bedrooms - $300</option>
+      <option value="deep2">Deep cleaning 4+ bedrooms - $500</option>
+      <option value="move">Move in/move out clean - $250</option>
+      <option value="commercial">Commercial cleaning - please contact</option>
+      <option value="recurring">Weekly, bi-weekly, monthly - special rates, please contact</option>
+    </select>
+  </label>
+  <label for="datePicker" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Preferred Date:
+    <input id="datePicker" type="date" name="date" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+  </label>
+  <label for="timeSelect" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Preferred Time:
+    <select id="timeSelect" name="time" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+      <option>9:00 AM</option>
+      <option>11:00 AM</option>
+      <option>1:00 PM</option>
+      <option>3:00 PM</option>
+    </select>
+  </label>
+  <label for="notesInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Additional Notes:
+    <textarea id="notesInput" name="notes" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;"></textarea>
+  </label>
+  <label for="remindersCheck" style="font-weight: 600; color: #7f5f3c;">
+    <input id="remindersCheck" type="checkbox" name="reminders" required style="margin-right: 6px;"> Text me reminders
+  </label>
+  <label for="paymentMethod" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
+    Payment Method:
+    <select id="paymentMethod" name="paymentMethod" required style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+      <option value="cash">Pay in cash on day of service</option>
+      <option value="stripe">Pay now and confirm booking</option>
+    </select>
+  </label>
+  <p id="stripePayNow" style="display:none;">
+    <a href="https://checkout.stripe.com/pay/YOUR_STRIPE_CHECKOUT_LINK" target="_blank" rel="noopener" style="background-color:#7f5f3c;color:#fff;padding:0.7rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:1rem;">Pay Now & Confirm Booking</a>
+  </p>
+  <p><strong>Total: $<span id="totalPrice">150</span></strong></p>
+  <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
+</form>
+<p id="thankYouMessage" style="display:none; font-weight: bold; color: green; margin-top: 1rem;">Thank you! Your booking has been received.</p>
+</section>
+<script>
+function updatePrice() {
+  const service = document.getElementById('serviceSelect').value;
+  const priceMap = {
+  under3: 150,
+  "4plus": 300,
+  deep1: 300,
+  deep2: 500,
+  move: 250,
+  commercial: '—',
+  recurring: '—'
+};
+  document.getElementById('totalPrice').innerText = priceMap[service] !== '—' ? priceMap[service] : 'Please contact';
+}
 
-      enterButton.disabled = true;
-      enterButton.textContent = 'Processing...';
+const form = document.getElementById('bookingForm');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  // simulate success and show thank you
+  form.style.display = 'none';
+  document.getElementById('thankYouMessage').style.display = 'block';
+  // NOTE: replace this with Stripe Checkout integration in next step
+});
+document.getElementById('paymentMethod').addEventListener('change', function() {
+  const stripePayNow = document.getElementById('stripePayNow');
+  if (this.value === 'stripe') {
+    stripePayNow.style.display = 'block';
+  } else {
+    stripePayNow.style.display = 'none';
+  }
+});
+</script>
 
-      try {
-        const res = await fetch('/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email })
-        });
-        const { sessionId } = await res.json();
+  <section id="pricing" style="display: none;">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧽</span>Our Pricing</h2>
+    <ul>
+      <li>Under 3 bedrooms: $150</li>
+      <li>4+ bedrooms: $300</li>
+      <li>Deep cleaning under 3 bedrooms: $300</li>
+      <li>Deep cleaning 4+ bedrooms: $500</li>
+      <li>Move in/move out clean: $250</li>
+      <li>Commercial cleaning – please contact</li>
+      <li>Weekly, bi-weekly, monthly special rates – please contact</li>
+    </ul>
+  </section>
 
-        // Redirect to Stripe Checkout
-        const { error } = await stripe.redirectToCheckout({ sessionId });
-        if (error) throw error;
-      } catch (err) {
-        console.error(err);
-        alert('Payment failed. Please try again.');
-        enterButton.disabled = false;
-        enterButton.textContent = 'Pay $1 & Enter';
-      }
-    });
-  </script>
-</body>
-</html>
+  <section id="testimonials" style="display: none;">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">🧹</span>What Our Clients Say</h2>
+    <div class="testimonial">
+      "Safai made my home feel brand new — and I love knowing everything is chemical-free!" – Ayesha K.
+    </div>
+    <div class="testimonial">
+      "Professional, punctual, and the cleanest my place has ever been. Highly recommend!" – James P.
+    </div>
+    <div class="testimonial">
+      "The natural products make a big difference for my allergies. Thank you, Safai!" – Lena M.
+    </div>
+  </section>
+
+  <section id="contact" style="display: none;">
+    <h2><span style="font-size:1.5rem; margin-right:10px;">📞</span>Contact Us</h2>
+    <p>Email: bookwithsafai@gmail.com<br />Phone: (469) 665-9991</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Safai. All rights reserved.
+  </footer>
+<a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
+<script>
+function createBubbles() {
+  // Remove existing bubbles
+  document.querySelectorAll('.bubble').forEach(b => b.remove());
+
+  // Find the currently visible section
+  const section = Array.from(document.querySelectorAll('section')).find(
+    s => s.style.display !== 'none'
+  );
+  if (!section) return;
+
+  // Get section's bounding rectangle and window size
+  const rect = section.getBoundingClientRect();
+  const minSize = 18, maxSize = 36;
+  const bubbleSpacing = 48; // Even larger spacing for fewer bubbles
+
+  // Fill left side
+  for (
+    let y = rect.top + window.scrollY;
+    y < rect.bottom + window.scrollY;
+    y += minSize + bubbleSpacing
+  ) {
+    for (
+      let x = window.scrollX;
+      x < rect.left + window.scrollX - minSize;
+      x += (minSize + bubbleSpacing) * 2.5 // Fewer bubbles horizontally
+    ) {
+      const size = minSize + Math.random() * (maxSize - minSize);
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = `${x}px`;
+      bubble.style.top = `${y}px`;
+      bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+      bubble.style.bottom = 'auto';
+      bubble.style.right = 'auto';
+
+      bubble.addEventListener('mouseenter', function () {
+        bubble.style.animation = 'pop 0.25s forwards';
+        setTimeout(() => {
+          bubble.remove();
+        }, 250);
+      });
+
+      document.body.appendChild(bubble);
+    }
+  }
+
+  // Fill right side
+  for (
+    let y = rect.top + window.scrollY;
+    y < rect.bottom + window.scrollY;
+    y += minSize + bubbleSpacing
+  ) {
+    for (
+      let x = rect.right + window.scrollX + 10;
+      x < window.innerWidth + window.scrollX - minSize;
+      x += (minSize + bubbleSpacing) * 2.5
+    ) {
+      const size = minSize + Math.random() * (maxSize - minSize);
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = `${x}px`;
+      bubble.style.top = `${y}px`;
+      bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+      bubble.style.bottom = 'auto';
+      bubble.style.right = 'auto';
+
+      bubble.addEventListener('mouseenter', function () {
+        bubble.style.animation = 'pop 0.25s forwards';
+        setTimeout(() => {
+          bubble.remove();
+        }, 250);
+      });
+
+      document.body.appendChild(bubble);
+    }
+  }
+}
+</script>
+
+<script>
+function showSection(id) {
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => section.style.display = 'none');
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = 'block';
+    createBubbles(); // Bubbles appear when a section is opened
+  }
+  window.location.hash = id;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '') || 'about';
+  showSection(hash);
+});
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#', '') || 'about';
+  showSection(hash);
+});
+</script>
+
+</html></html>
