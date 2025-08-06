@@ -146,8 +146,7 @@
     .bubble {
       position: absolute;
       bottom: -100px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
-q\      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));      border-radius: 50%;
       animation: rise 20s infinite ease-in;
       box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
       backdrop-filter: blur(2px);
@@ -409,68 +408,56 @@ function initAutocomplete() {
       if (!section) return;
       const rect = section.getBoundingClientRect();
       const minSize = 18, maxSize = 36;
-      const bubbleSpacing = 48;
+      const bubbleCount = 18; // Total bubbles per side
 
-      // Left side
-      for (
-        let y = rect.top + window.scrollY;
-        y < rect.bottom + window.scrollY;
-        y += minSize + bubbleSpacing
-      ) {
-        for (
-          let x = window.scrollX;
-          x < rect.left + window.scrollX - minSize;
-          x += (minSize + bubbleSpacing) * 2.5
-        ) {
-          const size = minSize + Math.random() * (maxSize - minSize);
-          const bubble = document.createElement('div');
-          bubble.classList.add('bubble');
-          bubble.style.width = size + 'px';
-          bubble.style.height = size + 'px';
-          bubble.style.left = `${x}px`;
-          bubble.style.top = `${y}px`;
-          bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
-          bubble.style.bottom = 'auto';
-          bubble.style.right = 'auto';
-          bubble.addEventListener('mouseenter', function () {
-            bubble.style.animation = 'pop 0.25s forwards';
-            setTimeout(() => {
-              bubble.remove();
-            }, 250);
-          });
-          document.body.appendChild(bubble);
-        }
+      // Left side (random scatter)
+      for (let i = 0; i < bubbleCount; i++) {
+        const size = minSize + Math.random() * (maxSize - minSize);
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        // Random vertical position within section
+        const y = rect.top + window.scrollY + Math.random() * rect.height;
+        // Random horizontal position within left margin area
+        const x = window.scrollX + Math.random() * (rect.left - window.scrollX - minSize);
+        bubble.style.left = `${x}px`;
+        bubble.style.top = `${y}px`;
+        bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+        bubble.style.bottom = 'auto';
+        bubble.style.right = 'auto';
+        bubble.addEventListener('mouseenter', function () {
+          bubble.style.animation = 'pop 0.25s forwards';
+          setTimeout(() => {
+            bubble.remove();
+          }, 250);
+        });
+        document.body.appendChild(bubble);
       }
 
-      // Right side
-      for (
-        let y = rect.top + window.scrollY;
-        y < rect.bottom + window.scrollY;
-        y += minSize + bubbleSpacing
-      ) {
-        for (
-          let x = rect.right + window.scrollX + 10;
-          x < window.innerWidth + window.scrollX - minSize;
-          x += (minSize + bubbleSpacing) * 2.5
-        ) {
-          const size = minSize + Math.random() * (maxSize - minSize);
-          const bubble = document.createElement('div');
-          bubble.classList.add('bubble');
-          bubble.style.width = size + 'px';
-          bubble.style.height = size + 'px';
-          bubble.style.left = `${x}px`;
-          bubble.style.top = `${y}px`;
-          bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
-          bubble.style.bottom = 'auto';
-          bubble.style.right = 'auto';
-          bubble.addEventListener('mouseenter', function () {
-            bubble.style.animation = 'pop 0.25s forwards';
-            setTimeout(() => {
-              bubble.remove();
-            }, 250);
-          });
-          document.body.appendChild(bubble);
-        }
+      // Right side (random scatter)
+      for (let i = 0; i < bubbleCount; i++) {
+        const size = minSize + Math.random() * (maxSize - minSize);
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+        // Random vertical position within section
+        const y = rect.top + window.scrollY + Math.random() * rect.height;
+        // Random horizontal position within right margin area
+        const x = rect.right + window.scrollX + 10 + Math.random() * (window.innerWidth + window.scrollX - rect.right - minSize - 10);
+        bubble.style.left = `${x}px`;
+        bubble.style.top = `${y}px`;
+        bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+        bubble.style.bottom = 'auto';
+        bubble.style.right = 'auto';
+        bubble.addEventListener('mouseenter', function () {
+          bubble.style.animation = 'pop 0.25s forwards';
+          setTimeout(() => {
+            bubble.remove();
+          }, 250);
+        });
+        document.body.appendChild(bubble);
       }
     }
 
