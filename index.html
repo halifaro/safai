@@ -146,8 +146,8 @@
     .bubble {
       position: absolute;
       bottom: -100px;
-      background: radial-gradient(circle at 30% 30%, rgba(120,180,255,0.85), rgba(120,180,255,0.25), rgba(255,255,255,0.2));
-      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
+q\      border-radius: 50%;
       animation: rise 20s infinite ease-in;
       box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
       backdrop-filter: blur(2px);
@@ -251,10 +251,15 @@ function initAutocomplete() {
 
   <section id="about" style="display: none;">
     <h2><span style="font-size:1.5rem; margin-right:10px;">🧴</span>Our Mission</h2>
-    <p>
-      At Safai, our mission is to provide exceptional home cleaning services using
-      only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
-    </p>
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <p style="margin-bottom: 0.8rem;">
+        At Safai, our mission is to provide exceptional home cleaning services using
+        only all-natural, chemical-free, and toxin-free products.
+      </p>
+      <p style="margin-bottom: 0.8rem;">
+        We believe that a truly clean home should be safe for your family, your pets, and the environment.
+      </p>
+    </div>
     <h3 style="margin-top: 2rem; color: #7f5f3c;">Our Services</h3>
     <ul>
       <li><strong>Under 3 Bedrooms :</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
