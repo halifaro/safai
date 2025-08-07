@@ -186,6 +186,7 @@
   </style>
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 function initAutocomplete() {
   const input = document.getElementById('autocomplete');
@@ -374,6 +375,21 @@ function initAutocomplete() {
   </footer>
   <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
   <script>
+    const stripe = Stripe('pk_test_51RpySiEBfvYES0li6HXXFGw6qU48dWV5LzFzs12qW8EDAjQyLxQl9VeV1CkKz3gZSGGkhLU1DIokvp9phWcdbpAq00bAeVyf1u');
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      if (paymentMethod === 'stripe') {
+        // Redirect directly to your Stripe Checkout test link
+        window.location.href = 'https://buy.stripe.com/test_14A9AT5CueDw7Ue2mdcfK00';
+      } else {
+        // Cash booking confirmation
+        this.style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'block';
+      }
+    });
+
     function updatePrice() {
       const service = document.getElementById('serviceSelect').value;
       const priceMap = {
@@ -461,26 +477,26 @@ function initAutocomplete() {
       }
     }
 
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      showSection(hash);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '') || 'about';
+      showSection(hash);
+    });
+
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(section => section.style.display = 'none');
       const el = document.getElementById(id);
       if (el) {
         el.style.display = 'block';
-        createBubbles();
       }
-      window.location.hash = id;
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash.replace('#', '') || 'about';
-      showSection(hash);
-    });
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '') || 'about';
-      showSection(hash);
-    });
+    createBubbles();
   </script>
-
 </body>
 </html>
