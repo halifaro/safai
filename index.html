@@ -146,7 +146,9 @@
     .bubble {
       position: absolute;
       bottom: -100px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
+      /* Removed blue hue, now bubbles are white/silver */
+      border-radius: 50%;
       animation: rise 20s infinite ease-in;
       box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
       backdrop-filter: blur(2px);
@@ -184,53 +186,6 @@
       }
     }
   </style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places&callback=initAutocomplete" async defer></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-function initAutocomplete() {
-  const input = document.getElementById('autocomplete');
-  if (!input) return;
-
-  const autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ['geocode'],
-    componentRestrictions: { country: 'us' }
-  });
-
-  const dallasBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(32.6, -97.0),
-    new google.maps.LatLng(33.1, -96.5)
-  );
-  autocomplete.setBounds(dallasBounds);
-
-  const observer = new MutationObserver(() => {
-    document.querySelectorAll('.pac-container').forEach(container => {
-      container.style.fontFamily = 'Roboto, sans-serif';
-      container.style.borderRadius = '6px';
-      container.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-      container.style.zIndex = '9999';
-    });
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Safai",
-  "telephone": "(469) 665-9991",
-  "email": "bookwithsafai@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Dallas",
-    "addressRegion": "TX",
-    "addressCountry": "US"
-  },
-  "url": "https://yourdomain.com/",
-  "description": "All-natural, chemical-free, and toxin-free cleaning services for homes and businesses in Dallas."
-}
-</script>
 </head>
 <body>
   <header style="background-color: #efece3; padding: 3rem 1rem 2rem; text-align: center;">
@@ -251,15 +206,10 @@ function initAutocomplete() {
 
   <section id="about" style="display: none;">
     <h2><span style="font-size:1.5rem; margin-right:10px;">🧴</span>Our Mission</h2>
-    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-      <p style="margin-bottom: 0.8rem;">
-        At Safai, our mission is to provide exceptional home cleaning services using
-        only all-natural, chemical-free, and toxin-free products.
-      </p>
-      <p style="margin-bottom: 0.8rem;">
-        We believe that a truly clean home should be safe for your family, your pets, and the environment.
-      </p>
-    </div>
+    <p>
+      At Safai, our mission is to provide exceptional home cleaning services using
+      only all-natural, chemical-free, and toxin-free products. We believe that a truly clean home should be safe for your family, your pets, and the environment.
+    </p>
     <h3 style="margin-top: 2rem; color: #7f5f3c;">Our Services</h3>
     <ul>
       <li><strong>Under 3 Bedrooms :</strong> Ideal for small homes and apartments. Includes kitchen, bathrooms, dusting, and vacuuming.</li>
@@ -375,21 +325,6 @@ function initAutocomplete() {
   </footer>
   <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
   <script>
-    const stripe = Stripe('pk_test_51RpySiEBfvYES0li6HXXFGw6qU48dWV5LzFzs12qW8EDAjQyLxQl9VeV1CkKz3gZSGGkhLU1DIokvp9phWcdbpAq00bAeVyf1u');
-
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const paymentMethod = document.getElementById('paymentMethod').value;
-      if (paymentMethod === 'stripe') {
-        // Redirect directly to your Stripe Checkout test link
-        window.location.href = 'https://buy.stripe.com/test_14A9AT5CueDw7Ue2mdcfK00';
-      } else {
-        // Cash booking confirmation
-        this.style.display = 'none';
-        document.getElementById('thankYouMessage').style.display = 'block';
-      }
-    });
-
     function updatePrice() {
       const service = document.getElementById('serviceSelect').value;
       const priceMap = {
@@ -477,26 +412,24 @@ function initAutocomplete() {
       }
     }
 
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '');
-      showSection(hash);
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash.replace('#', '') || 'about';
-      showSection(hash);
-    });
-
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(section => section.style.display = 'none');
       const el = document.getElementById(id);
       if (el) {
         el.style.display = 'block';
+        createBubbles();
       }
+      window.location.hash = id;
     }
 
-    createBubbles();
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '') || 'about';
+      showSection(hash);
+    });
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '') || 'about';
+      showSection(hash);
+    });
   </script>
-</body>
-</html>
+</html></html>
