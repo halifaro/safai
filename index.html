@@ -185,6 +185,17 @@
         filter: blur(4px);
       }
     }
+
+    /* Stripe button styling */
+    .stripe-btn {
+      display:inline-block; padding:.85em 1.25em; border-radius:8px;
+      background:#635bff; color:#fff; text-decoration:none; font:600 16px/1.1 system-ui, sans-serif;
+      box-shadow:0 6px 20px rgba(0,0,0,.12); transition:transform .08s ease, opacity .2s ease;
+    }
+    .stripe-btn:hover { opacity:.95 }
+    .stripe-btn:active { transform:translateY(1px) }
+    .help-text { color:#7f5f3c; font-size:.95rem; margin:.5rem 0 0 }
+    .muted { color:#6b6b6b }
   </style>
 </head>
 <body>
@@ -280,9 +291,16 @@
           <option value="stripe">Pay now and confirm booking</option>
         </select>
       </label>
-      <p id="stripePayNow" style="display:none;">
-        <a href="https://checkout.stripe.com/pay/YOUR_STRIPE_CHECKOUT_LINK" target="_blank" rel="noopener" style="background-color:#7f5f3c;color:#fff;padding:0.7rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:1rem;">Pay Now & Confirm Booking</a>
-      </p>
+
+      <!-- Stripe Pay Now area (auto-updates based on service) -->
+      <div id="stripeArea" class="help-text" style="display:none;">
+        <p class="muted">Payment opens in a secure Stripe page in a new tab.</p>
+        <p>
+          <a id="stripePayNow" href="#" target="_blank" rel="noopener" class="stripe-btn">Pay Now</a>
+        </p>
+        <p id="noStripeMsg" class="help-text" style="display:none;">Online payment isn’t available for this selection. Please choose <strong>Pay in cash</strong> and we’ll confirm over text.</p>
+      </div>
+
       <p><strong>Total: $<span id="totalPrice">150</span></strong></p>
       <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
     </form>
@@ -324,31 +342,85 @@
     &copy; 2025 Safai. All rights reserved.
   </footer>
   <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
+
   <script>
+    // ====== Stripe Payment Links Catalog (NO BACKEND) ======
+    // TODO: Replace each REPLACE_WITH_* URL with your real Stripe Payment Link URL (https://buy.stripe.com/....)
+    // You can create a separate Payment Link per service in your Stripe Dashboard.
+    const catalog = {
+      under3:  { price: 150, link: 'https://buy.stripe.com/REPLACE_WITH_UNDER3' },
+      '4plus': { price: 300, link: 'https://buy.stripe.com/REPLACE_WITH_4PLUS' },
+      deep1:   { price: 300, link: 'https://buy.stripe.com/REPLACE_WITH_DEEP1' },
+      deep2:   { price: 500, link: 'https://buy.stripe.com/REPLACE_WITH_DEEP2' },
+      move:    { price: 250, link: 'https://buy.stripe.com/REPLACE_WITH_MOVE' },
+      commercial: { price: null, link: null }, // contact-only
+      recurring:  { price: null, link: null }  // contact-only
+    };
+
     function updatePrice() {
       const service = document.getElementById('serviceSelect').value;
-      const priceMap = {
-        under3: 150,
-        "4plus": 300,
-        deep1: 300,
-        deep2: 500,
-        move: 250,
-        commercial: '—',
-        recurring: '—'
-      };
-      document.getElementById('totalPrice').innerText = priceMap[service] !== '—' ? priceMap[service] : 'Please contact';
+      const data = catalog[service];
+      const totalEl = document.getElementById('totalPrice');
+      totalEl.innerText = (data && typeof data.price === 'number') ? data.price : 'Please contact';
+      syncPaymentOptions();
+    }
+
+    function syncPaymentOptions() {
+      const service = document.getElementById('serviceSelect').value;
+      const methodSel = document.getElementById('paymentMethod');
+      const stripeArea = document.getElementById('stripeArea');
+      const stripeBtn = document.getElementById('stripePayNow');
+      const noStripeMsg = document.getElementById('noStripeMsg');
+
+      const data = catalog[service] || {};
+      const hasStripe = !!data.link;
+
+      // Enable/disable the Stripe option based on whether a link exists
+      const stripeOption = Array.from(methodSel.options).find(o => o.value === 'stripe');
+      if (stripeOption) stripeOption.disabled = !hasStripe;
+
+      // If current value is stripe but not available, switch back to cash
+      if (methodSel.value === 'stripe' && !hasStripe) methodSel.value = 'cash';
+
+      // Update button label & link
+      if (hasStripe && typeof data.price === 'number') {
+        stripeBtn.textContent = `Pay $${data.price} Now`;
+        stripeBtn.href = data.link;
+      } else {
+        stripeBtn.textContent = 'Pay Now';
+        stripeBtn.href = '#';
+      }
+
+      // Show/hide Stripe area depending on selected method
+      stripeArea.style.display = (methodSel.value === 'stripe') ? 'block' : 'none';
+      noStripeMsg.style.display = (!hasStripe && methodSel.value === 'stripe') ? 'block' : 'none';
     }
 
     const form = document.getElementById('bookingForm');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const method = document.getElementById('paymentMethod').value;
+      const service = document.getElementById('serviceSelect').value;
+      const data = catalog[service] || {};
+
+      if (method === 'stripe') {
+        // If Stripe selected but we don't have a link, block submission
+        if (!data.link) {
+          alert('Online payment is not available for this selection. Please choose Pay in cash or contact us.');
+          return;
+        }
+        // Open Stripe in a new tab and show a message. (We cannot auto-confirm without a backend.)
+        window.open(data.link, '_blank');
+        alert('A secure Stripe payment page has opened in a new tab. Complete payment there to confirm.');
+      }
+
       form.style.display = 'none';
       document.getElementById('thankYouMessage').style.display = 'block';
     });
 
     document.getElementById('paymentMethod').addEventListener('change', function() {
-      const stripePayNow = document.getElementById('stripePayNow');
-      stripePayNow.style.display = this.value === 'stripe' ? 'block' : 'none';
+      syncPaymentOptions();
     });
 
     function createBubbles() {
@@ -426,10 +498,12 @@
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
       showSection(hash);
+      updatePrice();
+      syncPaymentOptions();
     });
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
       showSection(hash);
     });
   </script>
-</html></html>
+</html>
