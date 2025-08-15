@@ -6,7 +6,6 @@
   <title>Safai | Pure Products. Powerful Clean.</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap');
-
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
@@ -19,15 +18,6 @@
       background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
       text-align: center;
-    }
-    header img {
-      width: 160px;
-      margin-bottom: 1rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: #ffffff;
     }
     nav {
       background: #7f5f3c;
@@ -62,10 +52,6 @@
       display: flex;
       align-items: center;
     }
-    section h2 img {
-      width: 30px;
-      margin-right: 10px;
-    }
     ul {
       line-height: 1.8;
       font-weight: 500;
@@ -85,54 +71,37 @@
       margin-bottom: 1rem;
       font-style: italic;
     }
-    .calendly-inline-widget {
-      min-width: 320px;
-      height: 630px;
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+      box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
+      backdrop-filter: blur(2px);
+      opacity: 0.8;
+      cursor: pointer;
     }
-    .fade-in {
-      font-family: 'Playfair Display', serif;
-      font-size: 5.5rem;
-      color: #7f5f3c;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.3; }
+      50% { opacity: 0.6; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
-    .bigger-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 6rem;
-      color: #7f5f3c;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; filter: blur(0); }
+      80% { transform: scale(1.7); opacity: 0.7; filter: blur(1px); }
+      100% { transform: scale(2.2); opacity: 0; filter: blur(4px); }
     }
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .stripe-btn {
+      display:inline-block; padding:.85em 1.25em; border-radius:8px;
+      background:#635bff; color:#fff; text-decoration:none; font:600 16px/1.1 system-ui, sans-serif;
+      box-shadow:0 6px 20px rgba(0,0,0,.12); transition:transform .08s ease, opacity .2s ease;
     }
-    @keyframes sectionFade {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    a[href="#booking"] {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    .sparkle-icon {
-      font-size: 5rem;
-      color: #c79c4d;
-      animation: sparkle 1.5s infinite ease-in-out;
-    }
-    @keyframes sparkle {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.8; }
-    }
+    .stripe-btn:hover { opacity:.95 }
+    .stripe-btn:active { transform:translateY(1px) }
+    .help-text { color:#7f5f3c; font-size:.95rem; margin:.5rem 0 0 }
+    .muted { color:#6b6b6b }
+    .error-text { color:#b00020; font-weight:600; }
     @keyframes gradientBG {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
@@ -143,59 +112,9 @@
       50% { background-position: 100% 100%; }
       100% { background-position: 0% 0%; }
     }
-    .bubble {
-      position: absolute;
-      bottom: -100px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(200,200,200,0.25), rgba(255,255,255,0.2));
-      /* Removed blue hue, now bubbles are white/silver */
-      border-radius: 50%;
-      animation: rise 20s infinite ease-in;
-      box-shadow: 0 0 24px 6px rgba(180, 180, 180, 0.18), 0 0 12px rgba(255,255,255,0.2);
-      backdrop-filter: blur(2px);
-      opacity: 0.8;
-      cursor: pointer;
+    @keyframes sectionFade {
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes rise {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.3;
-      }
-      50% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-120vh) scale(1.5);
-        opacity: 0;
-      }
-    }
-    @keyframes pop {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-        filter: blur(0);
-      }
-      80% {
-        transform: scale(1.7);
-        opacity: 0.7;
-        filter: blur(1px);
-      }
-      100% {
-        transform: scale(2.2);
-        opacity: 0;
-        filter: blur(4px);
-      }
-    }
-
-    /* Stripe button styling */
-    .stripe-btn {
-      display:inline-block; padding:.85em 1.25em; border-radius:8px;
-      background:#635bff; color:#fff; text-decoration:none; font:600 16px/1.1 system-ui, sans-serif;
-      box-shadow:0 6px 20px rgba(0,0,0,.12); transition:transform .08s ease, opacity .2s ease;
-    }
-    .stripe-btn:hover { opacity:.95 }
-    .stripe-btn:active { transform:translateY(1px) }
-    .help-text { color:#7f5f3c; font-size:.95rem; margin:.5rem 0 0 }
-    .muted { color:#6b6b6b }
   </style>
 </head>
 <body>
@@ -242,7 +161,7 @@
       </label>
       <label for="phoneInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Phone Number:
-        <input id="phoneInput" type="tel" name="phone" required autocomplete="tel" placeholder="(123) 456-7890" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+        <input id="phoneInput" type="tel" name="phone" required autocomplete="tel" placeholder="(123) 456-7890" inputmode="tel" pattern="\(?(\d{3})\)?[-.\s]?\d{3}[-.\s]?\d{4}" title="Please enter a valid phone number" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
       </label>
       <label for="emailInput" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Email Address:
@@ -250,7 +169,9 @@
       </label>
       <label for="autocomplete" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Home Address:
-        <input id="autocomplete" type="text" name="address" required autocomplete="street-address" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+        <input id="autocomplete" type="text" name="address" required autocomplete="off" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+        <div id="addressHelp" class="help-text">We currently only serve in the DFW area.</div>
+        <div id="addressError" class="error-text" style="display:none;">Sorry—our service area is DFW only. Please enter a DFW address.</div>
       </label>
       <label for="serviceSelect" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Select Service:
@@ -291,20 +212,17 @@
           <option value="stripe">Pay now and confirm booking</option>
         </select>
       </label>
-
-      <!-- Stripe Pay Now area (auto-updates based on service) -->
       <div id="stripeArea" class="help-text" style="display:none;">
-        <p class="muted">Payment opens in a secure Stripe page in a new tab.</p>
+        <p class="muted">You’ll be redirected to our secure Stripe checkout to complete payment.</p>
         <p>
-          <a id="stripePayNow" href="#" target="_blank" rel="noopener" class="stripe-btn">Pay Now</a>
+          <a id="stripePayNow" href="#" class="stripe-btn">Pay Now</a>
         </p>
         <p id="noStripeMsg" class="help-text" style="display:none;">Online payment isn’t available for this selection. Please choose <strong>Pay in cash</strong> and we’ll confirm over text.</p>
       </div>
-
       <p><strong>Total: $<span id="totalPrice">150</span></strong></p>
       <button type="submit" style="background-color: #7f5f3c; color: white; padding: 0.8rem 1.2rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease;">Submit Booking</button>
     </form>
-    <p id="thankYouMessage" style="display:none; font-weight: bold; color: green; margin-top: 1rem;">Thank you! Your booking has been received.</p>
+    <p id="thankYouMessage" role="status" aria-live="polite" style="display:none; font-weight: bold; color: green; margin-top: 1rem;">Thank you! Your booking has been received.</p>
   </section>
 
   <section id="pricing" style="display: none;">
@@ -344,24 +262,21 @@
   <a href="#booking" style="position: fixed; bottom: 30px; right: 30px; background-color: #7f5f3c; color: #000; font-family: 'Roboto', sans-serif; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 1000; transition: transform 0.2s ease-in-out;">Book Now</a>
 
   <script>
-    // ====== Stripe Payment Links Catalog (NO BACKEND) ======
-    // TODO: Replace each REPLACE_WITH_* URL with your real Stripe Payment Link URL (https://buy.stripe.com/....)
-    // You can create a separate Payment Link per service in your Stripe Dashboard.
+    // Stripe Payment Links Catalog
     const catalog = {
-      under3:  { price: 150, link: 'https://buy.stripe.com/test_4gMdR9e9052W4I26CtcfK03' },
-      '4plus': { price: 300, link: 'https://buy.stripe.com/test_6oU9ATgh83YS2zU3qhcfK05' },
-      deep1:   { price: 300, link: 'https://buy.stripe.com/test_14A14n8OG3YS0rM2mdcfK04' },
-      deep2:   { price: 500, link: 'https://buy.stripe.com/test_eVq8wP4yqfHAeiCf8ZcfK02' },
-      move:    { price: 250, link: 'https://buy.stripe.com/test_dRm14n5CufHA2zUf8ZcfK01' },
-      commercial: { price: null, link: null }, // contact-only
-      recurring:  { price: null, link: null }  // contact-only
+      under3:  { price: 150, link: 'https://buy.stripe.com/test_14A9AT5CueDw7Ue2mdcfK00' },
+      '4plus': { price: 300, link: null },
+      deep1:   { price: 300, link: null },
+      deep2:   { price: 500, link: null },
+      move:    { price: 250, link: null },
+      commercial: { price: null, link: null },
+      recurring:  { price: null, link: null }
     };
 
     function updatePrice() {
       const service = document.getElementById('serviceSelect').value;
       const data = catalog[service];
-      const totalEl = document.getElementById('totalPrice');
-      totalEl.innerText = (data && typeof data.price === 'number') ? data.price : 'Please contact';
+      document.getElementById('totalPrice').innerText = (data && typeof data.price === 'number') ? data.price : 'Please contact';
       syncPaymentOptions();
     }
 
@@ -371,18 +286,11 @@
       const stripeArea = document.getElementById('stripeArea');
       const stripeBtn = document.getElementById('stripePayNow');
       const noStripeMsg = document.getElementById('noStripeMsg');
-
       const data = catalog[service] || {};
       const hasStripe = !!data.link;
-
-      // Enable/disable the Stripe option based on whether a link exists
       const stripeOption = Array.from(methodSel.options).find(o => o.value === 'stripe');
       if (stripeOption) stripeOption.disabled = !hasStripe;
-
-      // If current value is stripe but not available, switch back to cash
       if (methodSel.value === 'stripe' && !hasStripe) methodSel.value = 'cash';
-
-      // Update button label & link
       if (hasStripe && typeof data.price === 'number') {
         stripeBtn.textContent = `Pay $${data.price} Now`;
         stripeBtn.href = data.link;
@@ -390,37 +298,43 @@
         stripeBtn.textContent = 'Pay Now';
         stripeBtn.href = '#';
       }
-
-      // Show/hide Stripe area depending on selected method
       stripeArea.style.display = (methodSel.value === 'stripe') ? 'block' : 'none';
       noStripeMsg.style.display = (!hasStripe && methodSel.value === 'stripe') ? 'block' : 'none';
     }
 
+    document.getElementById('serviceSelect').addEventListener('change', updatePrice);
+    document.getElementById('paymentMethod').addEventListener('change', syncPaymentOptions);
+
     const form = document.getElementById('bookingForm');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
+      const address = document.getElementById('autocomplete').value.trim();
+      // DFW check stub (always true for demo)
+      const dateVal = document.getElementById('datePicker').value;
+      if (dateVal) {
+        const chosen = new Date(dateVal + 'T00:00:00');
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        if (chosen < tomorrow) {
+          alert('Same-day appointments are not available. Please choose a date starting tomorrow.');
+          return;
+        }
+      }
       const method = document.getElementById('paymentMethod').value;
       const service = document.getElementById('serviceSelect').value;
       const data = catalog[service] || {};
-
       if (method === 'stripe') {
-        // If Stripe selected but we don't have a link, block submission
         if (!data.link) {
           alert('Online payment is not available for this selection. Please choose Pay in cash or contact us.');
           return;
         }
-        // Open Stripe in a new tab and show a message. (We cannot auto-confirm without a backend.)
-        window.open(data.link, '_blank');
-        alert('A secure Stripe payment page has opened in a new tab. Complete payment there to confirm.');
+        window.location.href = data.link;
+        return;
       }
-
       form.style.display = 'none';
       document.getElementById('thankYouMessage').style.display = 'block';
-    });
-
-    document.getElementById('paymentMethod').addEventListener('change', function() {
-      syncPaymentOptions();
     });
 
     function createBubbles() {
@@ -431,56 +345,46 @@
       if (!section) return;
       const rect = section.getBoundingClientRect();
       const minSize = 18, maxSize = 36;
-      const bubbleCount = 18; // Total bubbles per side
-
-      // Left side (random scatter)
-      for (let i = 0; i < bubbleCount; i++) {
-        const size = minSize + Math.random() * (maxSize - minSize);
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        bubble.style.width = size + 'px';
-        bubble.style.height = size + 'px';
-        // Random vertical position within section
-        const y = rect.top + window.scrollY + Math.random() * rect.height;
-        // Random horizontal position within left margin area
-        const x = window.scrollX + Math.random() * (rect.left - window.scrollX - minSize);
-        bubble.style.left = `${x}px`;
-        bubble.style.top = `${y}px`;
-        bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
-        bubble.style.bottom = 'auto';
-        bubble.style.right = 'auto';
-        bubble.addEventListener('mouseenter', function () {
-          bubble.style.animation = 'pop 0.25s forwards';
-          setTimeout(() => {
-            bubble.remove();
-          }, 250);
-        });
-        document.body.appendChild(bubble);
+      const bubbleCount = 18;
+      const leftWidth = Math.max(0, rect.left - window.scrollX - minSize);
+      const rightWidth = Math.max(0, (window.innerWidth + window.scrollX) - rect.right - minSize - 10);
+      if (leftWidth > 0) {
+        for (let i = 0; i < bubbleCount; i++) {
+          const size = minSize + Math.random() * (maxSize - minSize);
+          const bubble = document.createElement('div');
+          bubble.classList.add('bubble');
+          bubble.style.width = size + 'px';
+          bubble.style.height = size + 'px';
+          const y = rect.top + window.scrollY + Math.random() * rect.height;
+          const x = window.scrollX + Math.random() * leftWidth;
+          bubble.style.left = `${x}px`;
+          bubble.style.top = `${y}px`;
+          bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+          bubble.addEventListener('mouseenter', function () {
+            bubble.style.animation = 'pop 0.25s forwards';
+            setTimeout(() => bubble.remove(), 250);
+          });
+          document.body.appendChild(bubble);
+        }
       }
-
-      // Right side (random scatter)
-      for (let i = 0; i < bubbleCount; i++) {
-        const size = minSize + Math.random() * (maxSize - minSize);
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        bubble.style.width = size + 'px';
-        bubble.style.height = size + 'px';
-        // Random vertical position within section
-        const y = rect.top + window.scrollY + Math.random() * rect.height;
-        // Random horizontal position within right margin area
-        const x = rect.right + window.scrollX + 10 + Math.random() * (window.innerWidth + window.scrollX - rect.right - minSize - 10);
-        bubble.style.left = `${x}px`;
-        bubble.style.top = `${y}px`;
-        bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
-        bubble.style.bottom = 'auto';
-        bubble.style.right = 'auto';
-        bubble.addEventListener('mouseenter', function () {
-          bubble.style.animation = 'pop 0.25s forwards';
-          setTimeout(() => {
-            bubble.remove();
-          }, 250);
-        });
-        document.body.appendChild(bubble);
+      if (rightWidth > 0) {
+        for (let i = 0; i < bubbleCount; i++) {
+          const size = minSize + Math.random() * (maxSize - minSize);
+          const bubble = document.createElement('div');
+          bubble.classList.add('bubble');
+          bubble.style.width = size + 'px';
+          bubble.style.height = size + 'px';
+          const y = rect.top + window.scrollY + Math.random() * rect.height;
+          const x = rect.right + window.scrollX + 10 + Math.random() * rightWidth;
+          bubble.style.left = `${x}px`;
+          bubble.style.top = `${y}px`;
+          bubble.style.animation = `rise ${8 + Math.random() * 4}s infinite ease-in`;
+          bubble.addEventListener('mouseenter', function () {
+            bubble.style.animation = 'pop 0.25s forwards';
+            setTimeout(() => bubble.remove(), 250);
+          });
+          document.body.appendChild(bubble);
+        }
       }
     }
 
@@ -500,10 +404,79 @@
       showSection(hash);
       updatePrice();
       syncPaymentOptions();
+      // Set min date for booking
+      const dp = document.getElementById('datePicker');
+      if (dp) {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        dp.min = `${yyyy}-${mm}-${dd}`;
+        if (!dp.value) dp.value = dp.min;
+      }
     });
+
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
       showSection(hash);
     });
   </script>
+</body>
 </html>
+
+<!-- =============================================
+  success.html (Create this as a separate file)
+  Configure each Stripe Payment Link to redirect here after payment.
+=============================================== -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safai — Payment Successful</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;margin:0;display:grid;place-items:center;min-height:100vh;background:#f7f5f0;color:#1f1f1f}
+    .card{background:#fff;padding:2rem 2.5rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08);max-width:560px;text-align:center}
+    h1{color:#2e7d32;margin:0 0 0.5rem}
+    a.btn{display:inline-block;margin-top:1rem;padding:.7rem 1.2rem;border-radius:8px;background:#7f5f3c;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Payment received. Thank you!</h1>
+    <p>Your booking request has been received. We will text you shortly to confirm your appointment details.</p>
+    <a class="btn" href="/safai/">Back to Safai</a>
+  </div>
+</body>
+</html>
+-->
+
+<!-- =============================================
+  cancel.html (Create this as a separate file)
+  Configure Stripe to redirect here if the buyer cancels checkout.
+=============================================== -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safai — Payment Canceled</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;margin:0;display:grid;place-items:center;min-height:100vh;background:#f7f5f0;color:#1f1f1f}
+    .card{background:#fff;padding:2rem 2.5rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08);max-width:560px;text-align:center}
+    h1{color:#8b0000;margin:0 0 .5rem}
+    a.btn{display:inline-block;margin-top:1rem;padding:.7rem 1.2rem;border-radius:8px;background:#7f5f3c;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Checkout canceled.</h1>
+    <p>No payment was made. You can change your selection and try again anytime.</p>
+    <a class="btn" href="/safai/">Back to Safai</a>
+  </div>
+</body>
+</html>
+-->
