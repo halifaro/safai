@@ -24,17 +24,13 @@
       display:inline-block; margin-top:1rem; padding:.7rem 1.1rem; border-radius:10px;
       background:var(--brand); color:#fff; text-decoration:none; font-weight:700;
     }
-    .logo{
-      display:block; width:120px; margin:0 auto 8px; border:none;
-    }
-    .brand{ text-align:center; font:700 28px/1.2 Georgia,'Times New Roman',serif; color:var(--accent); }
+    .brand{ text-align:center; font:700 28px/1.2 Georgia,'Times New Roman',serif; color:var(--accent); margin-bottom:.25rem; }
     .small{ font-size:.92rem; }
     pre{ white-space:pre-wrap; background:#f4f1ea; padding:.75rem; border-radius:8px; }
   </style>
 </head>
 <body>
   <div class="card" role="main">
-    <img class="logo" src="https://halifaro.github.io/safai/logo.png" alt="Safai">
     <div class="brand">Safai</div>
 
     <h1>Payment received. Thank you!</h1>
@@ -56,20 +52,18 @@
     /* ====== Configure these ====== */
     const EMAILJS_PUBLIC_KEY   = 'jg3ChxL0l6l_RIEpu';
     const EMAILJS_SERVICE_ID   = 'service_ctc80sq';
-    const CUSTOMER_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_CUSTOMER'; // <-- replace
-    const ADMIN_TEMPLATE_ID    = 'YOUR_TEMPLATE_ID_ADMIN';    // <-- replace
+    const CUSTOMER_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_CUSTOMER'; // <-- replace in EmailJS
+    const ADMIN_TEMPLATE_ID    = 'YOUR_TEMPLATE_ID_ADMIN';    // <-- replace in EmailJS
 
-    /* Branding (used in email templates) */
+    /* Branding (no logo per your request) */
     const BRAND_NAME    = 'Safai';
-    const LOGO_URL      = 'https://halifaro.github.io/safai/logo.png';
     const SITE_URL      = 'https://halifaro.github.io/safai/';
     const PRIMARY_COLOR = '#7f5f3c';
     const ACCENT_COLOR  = '#c79c4d';
 
     function readBooking(){
-      try {
-        return JSON.parse(localStorage.getItem('safaiBooking') || '{}');
-      } catch(e){ return {}; }
+      try { return JSON.parse(localStorage.getItem('safaiBooking') || '{}'); }
+      catch(e){ return {}; }
     }
 
     function renderSummary(b){
@@ -130,6 +124,7 @@ If anything looks off, just reply to this email.
       emailjs.init(EMAILJS_PUBLIC_KEY);
       status.textContent = 'Sending your confirmation…';
 
+      // include current year for template footer
       const year = new Date().getFullYear();
 
       const customerParams = {
@@ -141,8 +136,11 @@ If anything looks off, just reply to this email.
         address:  b.address,
         total:    b.price,
         notes:    b.notes || '',
-        brand: BRAND_NAME, logo_url: LOGO_URL, site_url: SITE_URL,
-        primary_color: PRIMARY_COLOR, accent_color: ACCENT_COLOR, year
+        brand: BRAND_NAME,
+        site_url: SITE_URL,
+        primary_color: PRIMARY_COLOR,
+        accent_color: ACCENT_COLOR,
+        year
       };
 
       const adminParams = {
@@ -155,8 +153,11 @@ If anything looks off, just reply to this email.
         time:           b.time,
         total:          b.price,
         notes:          b.notes || '',
-        brand: BRAND_NAME, logo_url: LOGO_URL, site_url: SITE_URL,
-        primary_color: PRIMARY_COLOR, accent_color: ACCENT_COLOR, year
+        brand: BRAND_NAME,
+        site_url: SITE_URL,
+        primary_color: PRIMARY_COLOR,
+        accent_color: ACCENT_COLOR,
+        year
       };
 
       Promise.all([
