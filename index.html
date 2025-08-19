@@ -172,7 +172,7 @@
       <label for="autocomplete" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Home Address:
         <input id="autocomplete" type="text" name="address" required autocomplete="off" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
-        $1
+        <div id="addressHelp" class="help-text">We currently only serve in the DFW area.</div>
         <div id="addressStatus" class="help-text" style="display:none;">Address autocomplete temporarily unavailable — please type your address manually.</div>
         <div id="addressError" class="error-text" style="display:none;">Sorry—our service area is DFW only. Please enter a DFW address.</div>
       </label>
@@ -485,20 +485,7 @@
 
     // If Google reports an auth failure (bad key/referrer), fall back gracefully
     window.gm_authFailure = () => showPlacesStatus(false);
-      // Remove any previous loader (in case key changed or partial load)
-      const old = document.getElementById('gmaps-places');
-      if (old) old.remove();
-      const s = document.createElement('script');
-      s.id = 'gmaps-places';
-      // TODO: replace with your real API key
-      s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places';
-      s.async = true;
-      s.defer = true;
-      s.onload = () => { try { initPlaces(); } catch (e) { console.error(e); } };
-      s.onerror = () => console.error('Google Places failed to load. Check API key, billing, referrer restrictions.');
-      document.head.appendChild(s);
-    }
-  </script>
+      </script>
 </body>
 </html>
 
