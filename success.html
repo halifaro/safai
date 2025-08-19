@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safai — Payment Successful</title>
+  <style>
+    :root{
+      --brand:#7f5f3c; --accent:#c79c4d; --paper:#fff; --bg:#f7f5f0; --ink:#1f1f1f; --muted:#555;
+    }
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+      background:var(--bg); color:var(--ink); display:grid; min-height:100vh; place-items:center;
+    }
+    .card{
+      width:min(720px, 92vw); background:var(--paper); border-radius:12px; padding:2rem 2.25rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    h1{ margin:0 0 .5rem; color:#2e7d32; }
+    .muted{ color:var(--muted); }
+    .row{ margin:.35rem 0; }
+    .divider{ height:1px; background:#efece3; margin:1rem 0 1.25rem; }
+    .btn{
+      display:inline-block; margin-top:1rem; padding:.7rem 1.1rem; border-radius:10px;
+      background:var(--brand); color:#fff; text-decoration:none; font-weight:700;
+    }
+    .logo{
+      display:block; width:120px; margin:0 auto 8px; border:none;
+    }
+    .brand{ text-align:center; font:700 28px/1.2 Georgia,'Times New Roman',serif; color:var(--accent); }
+    .small{ font-size:.92rem; }
+    pre{ white-space:pre-wrap; background:#f4f1ea; padding:.75rem; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <img class="logo" src="https://halifaro.github.io/safai/logo.png" alt="Safai">
+    <div class="brand">Safai</div>
+
+    <h1>Payment received. Thank you!</h1>
+    <p class="muted">Your booking request has been recorded. We’ll text you shortly to confirm your appointment.</p>
+
+    <div class="divider"></div>
+
+    <div id="summary" aria-live="polite"></div>
+    <div id="status" class="row muted">Preparing your confirmation email…</div>
+    <div id="actions" class="row"></div>
+
+    <a class="btn" href="/safai/">Back to Safai</a>
+    <p class="small muted">If you don’t see an email within a few minutes, check Spam/Promotions.</p>
+  </div>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    /* ====== Configure these ====== */
+    const EMAILJS_PUBLIC_KEY   = 'jg3ChxL0l6l_RIEpu';
+    const EMAILJS_SERVICE_ID   = 'service_ctc80sq';
+    const CUSTOMER_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_CUSTOMER'; // <-- replace
+    const ADMIN_TEMPLATE_ID    = 'YOUR_TEMPLATE_ID_ADMIN';    // <-- replace
+
+    /* Branding (used in email templates) */
+    const BRAND_NAME    = 'Safai';
+    const LOGO_URL      = 'https://halifaro.github.io/safai/logo.png';
+    const SITE_URL      = 'https://halifaro.github.io/safai/';
+    const PRIMARY_COLOR = '#7f5f3c';
+    const ACCENT_COLOR  = '#c79c4d';
+
+    function readBooking(){
+      try {
+        return JSON.parse(localStorage.getItem('safaiBooking') || '{}');
+      } catch(e){ return {}; }
+    }
+
+    function renderSummary(b){
+      const el = document.getElementById('summary');
+      if (!b || !b.serviceName){
+        el.innerHTML = '<p class="muted">We could not find your booking details on this device, but your payment completed. We\'ll follow up by text.</p>';
+        return;
+      }
+      el.innerHTML = [
+        `<div class="row"><strong>Name:</strong> ${b.name || ''}</div>`,
+        `<div class="row"><strong>Email:</strong> ${b.email || ''}</div>`,
+        `<div class="row"><strong>Phone:</strong> ${b.phone || ''}</div>`,
+        `<div class="row"><strong>Address:</strong> ${b.address || ''}</div>`,
+        `<div class="row"><strong>Service:</strong> ${b.serviceName || ''}</div>`,
+        `<div class="row"><strong>Date/Time:</strong> ${b.date || ''} ${b.time || ''}</div>`,
+        `<div class="row"><strong>Total:</strong> $${b.price || ''}</div>`,
+        b.notes ? `<div class="row"><strong>Notes:</strong> ${b.notes}</div>` : ''
+      ].join('');
+    }
+
+    function buildMailto(b){
+      const subject = encodeURIComponent('Safai Booking Confirmation');
+      const body = encodeURIComponent(
+`Hi ${b.name||''},
+
+Thanks for booking with Safai! Here are your details:
+
+Service: ${b.serviceName||''}
+Date/Time: ${b.date||''} ${b.time||''}
+Address: ${b.address||''}
+Total: $${b.price||''}
+${b.notes?`Notes: ${b.notes}`:''}
+
+If anything looks off, just reply to this email.
+
+— Safai`
+      );
+      return `mailto:${b.email||''}?subject=${subject}&body=${body}`;
+    }
+
+    function sendEmails(b){
+      const status  = document.getElementById('status');
+      const actions = document.getElementById('actions');
+      const missingIds = (
+        !window.emailjs ||
+        EMAILJS_PUBLIC_KEY.startsWith('YOUR_') ||
+        EMAILJS_SERVICE_ID.startsWith('YOUR_') ||
+        CUSTOMER_TEMPLATE_ID.startsWith('YOUR_') ||
+        ADMIN_TEMPLATE_ID.startsWith('YOUR_')
+      );
+
+      if (missingIds) {
+        status.textContent = 'Automatic email is not configured.';
+        if (b && b.email) actions.innerHTML = `<a class="btn" href="${buildMailto(b)}">Email me these details</a>`;
+        return;
+      }
+
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      status.textContent = 'Sending your confirmation…';
+
+      const year = new Date().getFullYear();
+
+      const customerParams = {
+        to_email: b.email,
+        to_name:  b.name,
+        service:  b.serviceName,
+        date:     b.date,
+        time:     b.time,
+        address:  b.address,
+        total:    b.price,
+        notes:    b.notes || '',
+        brand: BRAND_NAME, logo_url: LOGO_URL, site_url: SITE_URL,
+        primary_color: PRIMARY_COLOR, accent_color: ACCENT_COLOR, year
+      };
+
+      const adminParams = {
+        customer_name:  b.name,
+        customer_email: b.email,
+        customer_phone: b.phone,
+        address:        b.address,
+        service:        b.serviceName,
+        date:           b.date,
+        time:           b.time,
+        total:          b.price,
+        notes:          b.notes || '',
+        brand: BRAND_NAME, logo_url: LOGO_URL, site_url: SITE_URL,
+        primary_color: PRIMARY_COLOR, accent_color: ACCENT_COLOR, year
+      };
+
+      Promise.all([
+        emailjs.send(EMAILJS_SERVICE_ID, CUSTOMER_TEMPLATE_ID, customerParams),
+        emailjs.send(EMAILJS_SERVICE_ID, ADMIN_TEMPLATE_ID,    adminParams)
+      ]).then(() => {
+        status.textContent = 'Confirmation email sent!';
+        actions.innerHTML = '';
+        // Optional: localStorage.removeItem('safaiBooking');
+      }).catch(err => {
+        console.error(err);
+        status.textContent = 'We could not send the email automatically.';
+        if (b && b.email) actions.innerHTML = `<a class="btn" href="${buildMailto(b)}">Email me these details</a>`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const booking = readBooking();
+      renderSummary(booking);
+      sendEmails(booking);
+    });
+  </script>
+</body>
+</html>
