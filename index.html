@@ -102,6 +102,8 @@
     .help-text { color:#7f5f3c; font-size:.95rem; margin:.5rem 0 0 }
     .muted { color:#6b6b6b }
     .error-text { color:#b00020; font-weight:600; }
+    /* Ensure Google Places dropdown appears above everything */
+    .pac-container { z-index: 10000 !important; }
     @keyframes gradientBG {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
@@ -169,8 +171,9 @@
       </label>
       <label for="autocomplete" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
         Home Address:
-        <input id="autocomplete" type="text" name="address" required autocomplete="street-address" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
-        <div id="addressHelp" class="help-text">We currently only serve in the DFW area.</div>
+        <input id="autocomplete" type="text" name="address" required autocomplete="off" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+        $1
+        <div id="addressStatus" class="help-text" style="display:none;">Address autocomplete temporarily unavailable — please type your address manually.</div>
         <div id="addressError" class="error-text" style="display:none;">Sorry—our service area is DFW only. Please enter a DFW address.</div>
       </label>
       <label for="serviceSelect" style="display: flex; flex-direction: column; font-weight: 600; color: #7f5f3c;">
@@ -395,6 +398,7 @@
       if (el) {
         el.style.display = 'block';
         createBubbles();
+        if (id === 'booking') { loadPlaces(); }
       }
       window.location.hash = id;
     }
@@ -415,12 +419,85 @@
         dp.min = `${yyyy}-${mm}-${dd}`;
         if (!dp.value) dp.value = dp.min;
       }
+      loadPlaces();
     });
 
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
       showSection(hash);
     });
+      // Google Places Autocomplete
+    let placesInitialized = false;
+    function initPlaces() {
+      if (placesInitialized) return;
+      const input = document.getElementById('autocomplete');
+      if (!input) return;
+      if (!(window.google && google.maps && google.maps.places)) return;
+      input.setAttribute('autocomplete', 'off');
+      const ac = new google.maps.places.Autocomplete(input, {
+        types: ['address'],
+        componentRestrictions: { country: 'us' },
+        fields: ['formatted_address','address_components','geometry']
+      });
+      placesInitialized = true;
+    }
+    function showPlacesStatus(ok) {
+      const s = document.getElementById('addressStatus');
+      if (s) s.style.display = ok ? 'none' : 'block';
+    }
+
+    function loadPlaces() {
+      // If already available, init once and hide any warning
+      if (window.google && google.maps && google.maps.places) {
+        try { initPlaces(); } catch (e) { console.error(e); }
+        showPlacesStatus(true);
+        return;
+      }
+      // Remove any previous loader (avoid stale keys / duplicate loads)
+      const old = document.getElementById('gmaps-places');
+      if (old) old.remove();
+      const s = document.createElement('script');
+      s.id = 'gmaps-places';
+      s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => {
+        if (window.google && google.maps && google.maps.places) {
+          try { initPlaces(); } catch (e) { console.error(e); }
+          showPlacesStatus(true);
+        } else {
+          showPlacesStatus(false);
+        }
+      };
+      s.onerror = () => {
+        console.error('Google Places failed to load. Check API key, billing, and referrer restrictions.');
+        showPlacesStatus(false);
+      };
+      document.head.appendChild(s);
+
+      // Failsafe: after 7s, if Places still missing, show manual-entry notice
+      setTimeout(() => {
+        if (!(window.google && google.maps && google.maps.places)) {
+          showPlacesStatus(false);
+        }
+      }, 7000);
+    }
+
+    // If Google reports an auth failure (bad key/referrer), fall back gracefully
+    window.gm_authFailure = () => showPlacesStatus(false);
+      // Remove any previous loader (in case key changed or partial load)
+      const old = document.getElementById('gmaps-places');
+      if (old) old.remove();
+      const s = document.createElement('script');
+      s.id = 'gmaps-places';
+      // TODO: replace with your real API key
+      s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDs5_nA_FUBMm2zH-AmmesV16ioGxSDy5E&libraries=places';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => { try { initPlaces(); } catch (e) { console.error(e); } };
+      s.onerror = () => console.error('Google Places failed to load. Check API key, billing, referrer restrictions.');
+      document.head.appendChild(s);
+    }
   </script>
 </body>
 </html>
