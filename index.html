@@ -117,6 +117,7 @@
     @keyframes sectionFade {
       to { opacity: 1; transform: translateY(0); }
     }
+  .footer-fixed { position: fixed !important; left: 0; right: 0; bottom: 0; width: 100%; }
   </style>
 </head>
 <body>
@@ -451,6 +452,25 @@
       }
     }
 
+    function adjustFooter(sectionId) {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+      // Always reset before measuring
+      footer.classList.remove('footer-fixed');
+      const shortPages = ['pricing','testimonials','contact'];
+      if (!shortPages.includes(sectionId)) return;
+      // Measure after paint so layout is accurate
+      requestAnimationFrame(() => {
+        const docHeight = document.documentElement.scrollHeight;
+        const winHeight = window.innerHeight;
+        if (docHeight <= winHeight) {
+          footer.classList.add('footer-fixed');
+        } else {
+          footer.classList.remove('footer-fixed');
+        }
+      });
+    }
+
     function showSection(id) {
       const sections = document.querySelectorAll('section');
       sections.forEach(section => section.style.display = 'none');
@@ -459,9 +479,9 @@
         el.style.display = 'block';
         createBubbles();
         if (id === 'booking') { loadPlaces(); }
+        adjustFooter(id);
       }
       window.location.hash = id;
-    }
 
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
@@ -485,6 +505,14 @@
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
       showSection(hash);
+    });
+    // Re-evaluate footer position on resize for current section
+    window.addEventListener('resize', () => {
+      const sections = document.querySelectorAll('section');
+      for (const s of sections) {
+        if (s.style.display !== 'none') { adjustFooter(s.id); break; }
+      }
+    });
     });
       // Google Places Autocomplete
     let placesInitialized = false;
