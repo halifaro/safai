@@ -452,20 +452,27 @@
       }
     }
 
-    function adjustFooter(sectionId) {
+    function adjustFooter(sectionId, after) {
       const footer = document.querySelector('footer');
-      if (!footer) return;
+      if (!footer) { if (typeof after === 'function') after(); return; }
       // Always reset before measuring
       footer.classList.remove('footer-fixed');
       const shortPages = ['pricing','testimonials','contact'];
-      if (!shortPages.includes(sectionId)) return;
-      // Measure after paint so layout is accurate
+      // If not one of the short pages, just run callback immediately
+      if (!shortPages.includes(sectionId)) { if (typeof after === 'function') after(); return; }
+      // Measure after paint so layout is accurate, then run callback on next frame
       requestAnimationFrame(() => {
         const docHeight = document.documentElement.scrollHeight;
         const winHeight = window.innerHeight;
         if (docHeight <= winHeight) {
           footer.classList.add('footer-fixed');
         } else {
+          footer.classList.remove('footer-fixed');
+        }
+        // ensure footer class is applied before creating bubbles
+        if (typeof after === 'function') requestAnimationFrame(after);
+      });
+    } else {
           footer.classList.remove('footer-fixed');
         }
       });
@@ -477,9 +484,10 @@
       const el = document.getElementById(id);
       if (el) {
         el.style.display = 'block';
-        adjustFooter(id);
-        createBubbles();
-        if (id === 'booking') { loadPlaces(); }
+        adjustFooter(id, () => {
+          createBubbles();
+          if (id === 'booking') { loadPlaces(); }
+        });
       }
       window.location.hash = id;
 }
@@ -511,7 +519,7 @@
     window.addEventListener('resize', () => {
       const sections = document.querySelectorAll('section');
       for (const s of sections) {
-        if (s.style.display !== 'none') { adjustFooter(s.id); break; }
+        if (s.style.display !== 'none') { adjustFooter(s.id, createBubbles); break; }
       }
     });
       // Google Places Autocomplete
