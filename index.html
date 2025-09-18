@@ -482,6 +482,7 @@
         adjustFooter(id);
       }
       window.location.hash = id;
+}
 
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '') || 'about';
@@ -512,7 +513,6 @@
       for (const s of sections) {
         if (s.style.display !== 'none') { adjustFooter(s.id); break; }
       }
-    });
     });
       // Google Places Autocomplete
     let placesInitialized = false;
