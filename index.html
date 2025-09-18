@@ -406,7 +406,7 @@
       const section = Array.from(document.querySelectorAll('section')).find(
         s => s.style.display !== 'none'
       );
-      if (!section) return;
+      if (!section) return; const footer = document.querySelector('footer'); const isShort = ['pricing','testimonials','contact'].includes(section.id) && footer && footer.classList.contains('footer-fixed');
       const rect = section.getBoundingClientRect();
       const minSize = 18, maxSize = 36;
       const bubbleCount = 18;
@@ -419,7 +419,7 @@
           bubble.classList.add('bubble');
           bubble.style.width = size + 'px';
           bubble.style.height = size + 'px';
-          const y = rect.top + window.scrollY + Math.random() * rect.height;
+          const y = isShort ? (footer.getBoundingClientRect().top + window.scrollY - size - Math.random()*20) : (rect.top + window.scrollY + Math.random() * rect.height);
           const x = window.scrollX + Math.random() * leftWidth;
           bubble.style.left = `${x}px`;
           bubble.style.top = `${y}px`;
@@ -438,7 +438,7 @@
           bubble.classList.add('bubble');
           bubble.style.width = size + 'px';
           bubble.style.height = size + 'px';
-          const y = rect.top + window.scrollY + Math.random() * rect.height;
+          const y = isShort ? (footer.getBoundingClientRect().top + window.scrollY - size - Math.random()*20) : (rect.top + window.scrollY + Math.random() * rect.height);
           const x = rect.right + window.scrollX + 10 + Math.random() * rightWidth;
           bubble.style.left = `${x}px`;
           bubble.style.top = `${y}px`;
@@ -477,9 +477,9 @@
       const el = document.getElementById(id);
       if (el) {
         el.style.display = 'block';
+        adjustFooter(id);
         createBubbles();
         if (id === 'booking') { loadPlaces(); }
-        adjustFooter(id);
       }
       window.location.hash = id;
 }
